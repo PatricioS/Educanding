@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CommentaryTest < ActiveSupport::TestCase
+class ViewTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

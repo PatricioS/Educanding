@@ -1,12 +1,14 @@
 class QuestionsController < ApplicationController
 	def index
+		@questions=Question.all
+	end
 	def show
 	def new
 		@question = Question.new
 	end
 
 	def create
-		@question = Question.new(params.require(:monstruo).permit(:nombre))
+		@question = Question.new(params[:texto]) #texto del cuadro
 		if @question.save
 			redirect_to questions_path
 		else
