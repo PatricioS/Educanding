@@ -1,4 +1,4 @@
 class Answer < ApplicationRecord
-	has_many :comments, dependent destroy
+	has_many :commentaries, dependent: :destroy
 	belongs_to :question
 end
