@@ -16,8 +16,13 @@
         <td><%= question.titulo %></td>
         <td><%= question.texto %></td>
         <td><%= link_to 'Mostrar', question %></td>
-        <td><%= link_to 'Editar', edit_question_path(question) %></td>
-        <td><%= link_to 'Eliminar', question, method: :delete, data: { confirm: '¿Estas seguro de realizar esta accion?' } %></td>
+        <% if user_signed_in? %>
+          <% if question.user.email==current_user.email %>
+            <td><%= link_to 'Editar', edit_question_path(question) %></td>
+            <td><%= link_to 'Eliminar', question, method: :delete, data: { confirm: '¿Estas seguro de realizar esta accion?' } %></td>
+          <% end %>
+        <%end%>
+        
       </tr>
     <% end %>
   </tbody>
