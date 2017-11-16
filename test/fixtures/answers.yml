@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  texto: MyString
-  puntaje: 1
+  user: one
+  question: one
+  texto: MyText
 
 two:
-  texto: MyString
-  puntaje: 1
+  user: two
+  question: two
+  texto: MyText
