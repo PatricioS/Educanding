@@ -7,9 +7,12 @@
     <%= csrf_meta_tags %>
 </head>
 <body>
-<h1> Texto </h1>
  
 <%= render "partials/navigation" %>
+
+
+
+<%= yield %>
 
 <% flash.each do |key, value| %>
 <div class="alert alert-<%= key %> alert-dismissable">
@@ -17,9 +20,5 @@
     <%= value %>
 </div>
 <% end %>
-
-<%= yield %>
-
-
 </body>
 </html>
