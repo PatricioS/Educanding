@@ -30177,3 +30177,274 @@ Processing by QuestionsController#index as HTML
 Completed 200 OK in 68ms (Views: 66.3ms | ActiveRecord: 0.6ms)
 
 
+Started GET "/questions" for 127.0.0.1 at 2017-11-16 04:15:51 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by QuestionsController#index as HTML
+  Rendering questions/index.html.erb within layouts/application
+  [1m[36mQuestion Load (2.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/index.html.erb within layouts/application (92.7ms)
+  Rendered partials/_navigation.html.erb (0.6ms)
+Completed 200 OK in 535ms (Views: 515.6ms | ActiveRecord: 4.6ms)
+
+
+Started GET "/questions/1" for 127.0.0.1 at 2017-11-16 04:16:01 -0300
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering questions/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/show.html.erb within layouts/application (12.8ms)
+  Rendered partials/_navigation.html.erb (0.6ms)
+Completed 200 OK in 68ms (Views: 64.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/questions" for 127.0.0.1 at 2017-11-16 04:16:03 -0300
+Processing by QuestionsController#index as HTML
+  Rendering questions/index.html.erb within layouts/application
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/index.html.erb within layouts/application (11.2ms)
+  Rendered partials/_navigation.html.erb (3.0ms)
+Completed 200 OK in 61ms (Views: 59.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-16 04:16:19 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered partials/_navigation.html.erb (4.0ms)
+Completed 200 OK in 59ms (Views: 57.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/vendor/bootstrap/css/bootstrap.min.css" for 127.0.0.1 at 2017-11-16 04:16:19 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/vendor/bootstrap/css/bootstrap.min.css"):
+  
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/css/shop-item.css" for 127.0.0.1 at 2017-11-16 04:16:19 -0300
+Started GET "/vendor/jquery/jquery.min.js" for 127.0.0.1 at 2017-11-16 04:16:19 -0300
+  
+  
+Started GET "/vendor/bootstrap/js/bootstrap.bundle.min.js" for 127.0.0.1 at 2017-11-16 04:16:19 -0300
+ActionController::RoutingError (No route matches [GET] "/css/shop-item.css"):
+ActionController::RoutingError (No route matches [GET] "/vendor/jquery/jquery.min.js"):
+  
+  
+  
+ActionController::RoutingError (No route matches [GET] "/vendor/bootstrap/js/bootstrap.bundle.min.js"):
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/questions" for 127.0.0.1 at 2017-11-16 04:16:21 -0300
+Processing by QuestionsController#index as HTML
+  Rendering questions/index.html.erb within layouts/application
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/index.html.erb within layouts/application (8.2ms)
+  Rendered partials/_navigation.html.erb (0.8ms)
+Completed 200 OK in 87ms (Views: 85.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/questions/1" for 127.0.0.1 at 2017-11-16 04:16:25 -0300
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering questions/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/show.html.erb within layouts/application (11.4ms)
+  Rendered partials/_navigation.html.erb (0.5ms)
+Completed 200 OK in 98ms (Views: 95.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/questions/1/edit" for 127.0.0.1 at 2017-11-16 04:16:27 -0300
+Processing by QuestionsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering questions/edit.html.erb within layouts/application
+  Rendered questions/_form.html.erb (124.1ms)
+  Rendered questions/edit.html.erb within layouts/application (127.8ms)
+  Rendered partials/_navigation.html.erb (0.6ms)
+Completed 200 OK in 193ms (Views: 180.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/questions" for 127.0.0.1 at 2017-11-16 04:16:30 -0300
+Processing by QuestionsController#index as HTML
+  Rendering questions/index.html.erb within layouts/application
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/index.html.erb within layouts/application (10.6ms)
+  Rendered partials/_navigation.html.erb (0.6ms)
+Completed 200 OK in 70ms (Views: 68.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2017-11-16 04:16:33 -0300
+Processing by QuestionsController#new as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering questions/new.html.erb within layouts/application
+  Rendered questions/_form.html.erb (6.3ms)
+  Rendered questions/new.html.erb within layouts/application (7.4ms)
+  Rendered partials/_navigation.html.erb (1.5ms)
+Completed 200 OK in 92ms (Views: 89.3ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/questions" for 127.0.0.1 at 2017-11-16 04:16:37 -0300
+Processing by QuestionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"oHMU4AP1D4YlOzyzDAnfwSaB0Q44l9Al1joJTnYS02TZU2I49lvz2GhsxHgy1mn8fKjsLR6ErhKIjM9efL0xgw==", "question"=>{"titulo"=>"sasa", "texto"=>"sasasa"}, "commit"=>"Crear Question"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (3.7ms)[0m  [1m[32mINSERT INTO "questions" ("titulo", "texto", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["titulo", "sasa"], ["texto", "sasasa"], ["created_at", "2017-11-16 07:16:37.616304"], ["updated_at", "2017-11-16 07:16:37.616304"], ["user_id", 1]]
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/questions/2
+Completed 302 Found in 41ms (ActiveRecord: 9.4ms)
+
+
+Started GET "/questions/2" for 127.0.0.1 at 2017-11-16 04:16:37 -0300
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering questions/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/show.html.erb within layouts/application (9.9ms)
+  Rendered partials/_navigation.html.erb (0.8ms)
+Completed 200 OK in 68ms (Views: 62.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/questions" for 127.0.0.1 at 2017-11-16 04:16:47 -0300
+Processing by QuestionsController#index as HTML
+  Rendering questions/index.html.erb within layouts/application
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/index.html.erb within layouts/application (16.2ms)
+  Rendered partials/_navigation.html.erb (0.6ms)
+Completed 200 OK in 120ms (Views: 118.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/questions" for 127.0.0.1 at 2017-11-16 04:19:01 -0300
+Processing by QuestionsController#index as HTML
+  Rendering questions/index.html.erb within layouts/application
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered questions/index.html.erb within layouts/application (19.4ms)
+  Rendered partials/_navigation.html.erb (2.8ms)
+Completed 200 OK in 105ms (Views: 103.1ms | ActiveRecord: 0.5ms)
+
+
