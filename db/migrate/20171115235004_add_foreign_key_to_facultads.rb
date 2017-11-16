@@ -1,5 +1,5 @@
 class AddForeignKeyToFacultads < ActiveRecord::Migration[5.1]
   def change
-  	add_indes :posts, :usuario_id
+  	add_index :facultads, :universidad_id
   end
 end

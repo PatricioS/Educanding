@@ -2,10 +2,8 @@
 
 one:
   titulo: MyString
-  texto: MyString
-  puntaje: 1
+  texto: MyText
 
 two:
   titulo: MyString
-  texto: MyString
-  puntaje: 1
+  texto: MyText
