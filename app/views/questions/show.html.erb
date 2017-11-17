@@ -1,32 +1,51 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-	Escrito por: <%=@question.user.email %>
-  <strong>Titulo:</strong>
-  <%= @question.titulo %>
+<br>
+<br>
+<table width="50%" border="2" cellpadding="2" cellspacing="0" bordercolor="#000000" BGCOLOR="#f2f2f2">
+	<tr> 
+		<th><strong>Titulo de la pregunta: <%= @question.titulo %></strong>	</th>
+	</tr>
+	<tr> 
+		<td>Cuerpo de la pregunta: <br> <%= @question.texto %> <br>
+		--------------------------------------------------------------------------------
+		<br>
+		<strong>Escrito por:  <%= @question.user.email %></td> 
+	</tr>
+</table>
+  
 </p>
-
-<p>
-  <strong>Texto:</strong>
-  <%= @question.texto %>
-</p>
-
 
 <div class="field">
-  <h3> Preguntas</h3>
+
+  <h3> Respuestas</h3>
+ <!-- <td><%= link_to 'Mostrar', @question_answer %></td> -->
+
+<table width="50%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000" bGCOLOR="#a9d0f5">
+
+<tr bGCOLOR="#5858fa">
+
+<th>Pregunta</th>
+<th>Autor</th>
+
+</tr>
+<% @question.answers.each do |answer| %>
+<tr>
+<td rowspan="1" valign="middle" align="left"> <%= answer.texto %> </td>
+
+<td><%= answer.user.email %></td>
+</tr>
+<%end%>
+
+
+</table>
+<br>
   <% if user_signed_in? %>
+  <h1>Responder: </h1>
   <%= render "answers/form" %>
   <%end%>
-  
-  <td><%= link_to 'Mostrar', @question_answer %></td>
-  <ul>
-    <% @question.answers.each do |answer| %>
-      <li>
-        <%= answer.texto %> - <%= answer.user.email %>
-      </li>
-      <%end%>
-    </ul>
-  </div>
+
 
 <% if user_signed_in? %>
 <% if @question.user.email==current_user.email %>
