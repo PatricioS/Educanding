@@ -13,8 +13,12 @@
 
 
 <div class="field">
-  <h3> Comentarios</h3>
+  <h3> Preguntas</h3>
+  <% if user_signed_in? %>
   <%= render "answers/form" %>
+  <%end%>
+  
+  <td><%= link_to 'Mostrar', @question_answer %></td>
   <ul>
     <% @question.answers.each do |answer| %>
       <li>
