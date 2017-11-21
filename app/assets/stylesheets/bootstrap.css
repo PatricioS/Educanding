@@ -540,7 +540,7 @@ mark,
 .blockquote-footer {
   display: block;
   font-size: 80%;
-  color: #868e96;
+  color: red;
 }
 
 .blockquote-footer::before {
