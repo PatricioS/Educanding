@@ -22,7 +22,6 @@ class AnswersController < ApplicationController
 
   # GET /answers/1/edit
   def edit
-    @answer.question = @question
   end
 
   # POST /answers

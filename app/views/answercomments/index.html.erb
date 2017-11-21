@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Answercomments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Answer</th>
+      <th>Texto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @answercomments.each do |answercomment| %>
+      <tr>
+        <td><%= answercomment.user %></td>
+        <td><%= answercomment.answer %></td>
+        <td><%= answercomment.texto %></td>
+        <td><%= link_to 'Show', answercomment %></td>
+        <td><%= link_to 'Edit', edit_answercomment_path(answercomment) %></td>
+        <td><%= link_to 'Destroy', answercomment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Answercomment', new_answercomment_path %>

@@ -2,8 +2,12 @@
 
 Rails.application.routes.draw do
 
+
+  resources :answercomments
   resources :questions do
-  	  resources :answers
+  	  resources :answers do
+  	  	  resources :answer_comments
+  	  	end
   	end
     devise_for :users, controllers: {
       sessions: 'users/sessions'
