@@ -4,13 +4,13 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :name, "Nombre"%><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.label :nombre, "Nombre"%><br />
+    <%= f.text_field :nombre, autofocus: true, required: true %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name, "Apellido" %><br />
-    <%= f.text_field :last_name %>
+    <%= f.label :apellido, "Apellido" %><br />
+    <%= f.text_field :apellido, required: true %>
   </div>
 
   <div class="field">

@@ -5,6 +5,7 @@
 #   gem 'sqlite3'
 #
 default: &default
+  #adapter: sqlite3  #-------------localhost:3000
   adapter: postgresql
   username: eliseo1995
   password: 123456

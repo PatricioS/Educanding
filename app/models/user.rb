@@ -6,4 +6,10 @@ class User < ApplicationRecord
    has_many :questions
    has_many :answers
    has_many :answercomments 
+   before_create :set_puntaje_inicial
+
+   private
+   def set_puntaje_inicial
+   	self.puntaje = 1
+   end
 end
