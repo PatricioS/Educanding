@@ -11,11 +11,13 @@
   <strong>User:</strong>
   <%= @answer.user.email %>
 </p>
+  <%= render "answercomments/form" %>
 
-  <% if user_signed_in? %>
+
+ <!-- <% if user_signed_in? %>
   <h1>Responder: </h1>
-<!--  <%= render "answercomments/form", question:@answer.question answer: @answer %>-->
-  <%end%>
+
+  <%end%>-->
 
 
 <%= link_to 'Edit', edit_question_answer_path(@answer) %> |

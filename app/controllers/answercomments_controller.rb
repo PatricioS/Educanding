@@ -1,7 +1,6 @@
 class AnswercommentsController < ApplicationController
   before_action :set_answercomment, only: [:show, :edit, :update, :destroy]
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :set_question
+  before_action :set_answer
   before_action :authenticate_user!
 
   # GET /answercomments
@@ -29,11 +28,10 @@ class AnswercommentsController < ApplicationController
   def create
     @answercomment = current_user.answercomments.new(answercomment_params)
     @answercomment.answer = @answer
-    @question= @answer.question
-
+    
     respond_to do |format|
       if @answercomment.save
-        format.html { redirect_to @answercomment, notice: 'Answercomment was successfully created.' }
+        format.html { redirect_to @answer.question , notice: 'Answercomment was successfully created.' }
         format.json { render :show, status: :created, location: @answercomment }
       else
         format.html { render :new }
@@ -76,9 +74,6 @@ class AnswercommentsController < ApplicationController
       @answer = Answer.find(params[:answer_id])
     end
 
-    def set_question
-      @question=Question.find(params[@answer.question_id])
-    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def answercomment_params
       params.require(:answercomment).permit(:user_id, :answer_id, :texto)

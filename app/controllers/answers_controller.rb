@@ -13,6 +13,7 @@ class AnswersController < ApplicationController
   # GET /answers/1
   # GET /answers/1.json
   def show
+            @answercomment=Answercomment.new
   end
 
   # GET /answers/new

@@ -1,29 +1,20 @@
 <%= form_for([@question,@answer,@answercomment]) do |form| %>
-  <% if answercomment.errors.any? %>
+  <% if @answercomment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(answercomment.errors.count, "error") %> prohibited this answercomment from being saved:</h2>
 
       <ul>
-      <% answercomment.errors.full_messages.each do |message| %>
+      <% @answercomment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :answercomment_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :answer_id %>
-    <%= form.text_field :answer_id, id: :answercomment_answer_id %>
-  </div>
 
   <div class="field">
     <%= form.label :texto %>
-    <%= form.text_area :texto, id: :answercomment_texto %>
+    <%= form.text_area :texto, id: :answercomment_texto,  size:"150x4"  %>
   </div>
 
   <div class="actions">
