@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123223917) do
+ActiveRecord::Schema.define(version: 20171125022328) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answercomments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "answer_id"
+    t.bigint "user_id"
+    t.bigint "answer_id"
     t.text "texto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20171123223917) do
   end
 
   create_table "answers", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "question_id"
+    t.bigint "user_id"
+    t.bigint "question_id"
     t.text "texto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,8 +53,6 @@ ActiveRecord::Schema.define(version: 20171123223917) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "universidad_id"
-    t.index ["universidad_id"], name: "index_facultads_on_universidad_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 20171123223917) do
     t.text "texto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
@@ -84,4 +85,9 @@ ActiveRecord::Schema.define(version: 20171123223917) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answercomments", "answers"
+  add_foreign_key "answercomments", "users"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "questions", "users"
 end
