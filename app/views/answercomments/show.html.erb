@@ -15,5 +15,6 @@
   <%= @answercomment.texto %>
 </p>
 
-<%= link_to 'Edit', edit_answercomment_path(@answercomment) %> |
-<%= link_to 'Back', answercomments_path %>
+<%= link_to 'Edit', edit_question_answer_answercomment_path(@question,@answer,@answercomment) %> |
+<%= link_to 'Borrar', question_answer_answercomment_path(@question,@answer,@answercomment),  :method => :delete %> |
+<%= link_to 'Back', question_answer_path(@question,@answer) %>

@@ -1,6 +1,7 @@
-<h1>Editing Answercomment</h1>
 
-<%= render 'form', answercomment: @answercomment %>
+<br>
+<h1>Editando comentario</h1>
 
-<%= link_to 'Show', @answercomment %> |
-<%= link_to 'Back', answercomments_path %>
+<%= render 'form', question: @question, answer: @answer, answercomment: @answercomment %>
+
+<%= link_to 'Back', question_answer_path(@question,@answer) %>

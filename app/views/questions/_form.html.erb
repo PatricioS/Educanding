@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :titulo %>
-    <%= form.text_field :titulo, id: :question_titulo %>
+    <%= form.text_field :titulo, id: :question_titulo, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :texto %>
-    <%= form.text_area :texto, id: :question_texto %>
+    <%= form.text_area :texto, id: :question_texto, required: true %>
   </div>
 
   <div class="actions">

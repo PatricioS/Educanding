@@ -1,6 +1,7 @@
 class AnswercommentsController < ApplicationController
   before_action :set_answercomment, only: [:show, :edit, :update, :destroy]
   before_action :set_answer
+  before_action :set_question
   before_action :authenticate_user!
 
   # GET /answercomments
@@ -21,6 +22,7 @@ class AnswercommentsController < ApplicationController
 
   # GET /answercomments/1/edit
   def edit
+    @question=@answer.question
   end
 
   # POST /answercomments
@@ -31,7 +33,7 @@ class AnswercommentsController < ApplicationController
     
     respond_to do |format|
       if @answercomment.save
-        format.html { redirect_to @answer.question , notice: 'Answercomment was successfully created.' }
+        format.html { redirect_to @answercomment.answer.question , notice: 'Answercomment was successfully created.' }
         format.json { render :show, status: :created, location: @answercomment }
       else
         format.html { render :new }
@@ -45,11 +47,11 @@ class AnswercommentsController < ApplicationController
   def update
     respond_to do |format|
       if @answercomment.update(answercomment_params)
-        format.html { redirect_to @answercomment, notice: 'Answercomment was successfully updated.' }
+        format.html { redirect_to @answercomment.answer.question , notice: 'Answercomment was successfully updated.'  }
         format.json { render :show, status: :ok, location: @answercomment }
       else
         format.html { render :edit }
-        format.json { render json: @answercomment.errors, status: :unprocessable_entity }
+        format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,9 +59,10 @@ class AnswercommentsController < ApplicationController
   # DELETE /answercomments/1
   # DELETE /answercomments/1.json
   def destroy
+    @answer=@answercomment.answer
     @answercomment.destroy
     respond_to do |format|
-      format.html { redirect_to answercomments_url, notice: 'Answercomment was successfully destroyed.' }
+      format.html { redirect_to @question, notice: 'Answercomment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -74,6 +77,9 @@ class AnswercommentsController < ApplicationController
       @answer = Answer.find(params[:answer_id])
     end
 
+    def set_question
+      @question=Question.find(params[:question_id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def answercomment_params
       params.require(:answercomment).permit(:user_id, :answer_id, :texto)
