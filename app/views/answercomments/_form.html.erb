@@ -13,11 +13,11 @@
 
 
   <div class="field">
-    <%= form.label :texto %>
-    <%= form.text_area :texto, id: :answercomment_texto, required: true,  size:"150x4"  %>
+   <h2> <%= form.label :Comentar %> </h2>
+    <%= form.text_area :texto, id: :answercomment_texto, required: true,  size:"150x4",placeholder:'Escribe un comentario'  %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit value="Crear comentario"%>
   </div>
 <% end %>

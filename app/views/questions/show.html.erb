@@ -16,14 +16,56 @@
 </table>
   
 </p>
+<table width="90%" border="0" cellpadding="1" cellspacing="0" bordercolor="#000000" BGCOLOR="#fafafa" >
+	<% if @question.questioncomments.any? %>
+		<tr> <h2>Comentarios</h2>
+		</tr>
+		<%end%>
+
+<% @question.questioncomments.each do |questioncomment| %>
+<tr>
+<td align="center" BGCOLOR="#e0e6f8">
+			<table width="80%" border="3" cellpadding="1" cellspacing="1" bordercolor="#000000" BGCOLOR="#f2f2f1" >
+				<tr> 
+				<br><br>
+					<th><strong>Comentario del usuario: <%= questioncomment.user.email %></strong>	</th>
+				</tr>
+				<tr> 
+					<td><br> <%= questioncomment.texto %> <br>
+					-----------------------------------------------------------------------------------------------------
+					<br>
+					<strong>fecha de creacion: <%= questioncomment.created_at%> </strong> | 
+					<% if questioncomment.user.email==current_user.email %>
+						<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
+						<%= link_to 'Borrar', question_questioncomment_path(@question,questioncomment),  :method => :delete %> |
+					<%end%>
+					</td>
+				</tr>
+			</table>
+
+			<%end%>
+
+
+</td>
+</tr>
+</table>
+
+  <% if user_signed_in? %>
+  <h3>Comentar: </h3>
+  	<%= render "questioncomments/form" %>
+  <%end%>
+	
+
 
 <div class="field">
 
  <!-- <td><%= link_to 'Mostrar', @question_answer %></td> -->
 
 <table frame="box" border="3" cellpadding="2" bordercolor="#000000" BGCOLOR="#a9a9f5" align="center" width="90%">
-	<h1 align="left">--------------------------------------------Respuestas--------------------------------------------</h1>
+<% if @question.questioncomments.any? %>
+	<h2 align="left">--------------------------------------------Respuestas--------------------------------------------</h2>
 	<tr></tr>
+	<%end%>
 	<td align="center">	<br>
 
 	<% @question.answers.each do |answer| %>
@@ -70,9 +112,6 @@
 	</td>
 </table>
 
-
-
-<%link_to 'nuevo', new_question_answer_path(@question) %> 
 <br>
   <% if user_signed_in? %>
   <h1>Responder: </h1>

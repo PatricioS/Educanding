@@ -2,7 +2,9 @@
 
 Rails.application.routes.draw do
   
+  resources :questioncomments
   resources :questions do
+      resources :questioncomments
   	  resources :answers do
   	  		resources :answercomments
   	  	end

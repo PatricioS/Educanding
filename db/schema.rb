@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125022328) do
+ActiveRecord::Schema.define(version: 20171125224300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(version: 20171125022328) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "universidad_id"
+    t.index ["universidad_id"], name: "index_facultads_on_universidad_id"
+  end
+
+  create_table "questioncomments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "question_id"
+    t.text "texto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_questioncomments_on_question_id"
+    t.index ["user_id"], name: "index_questioncomments_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -89,5 +101,7 @@ ActiveRecord::Schema.define(version: 20171125022328) do
   add_foreign_key "answercomments", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "questioncomments", "questions"
+  add_foreign_key "questioncomments", "users"
   add_foreign_key "questions", "users"
 end

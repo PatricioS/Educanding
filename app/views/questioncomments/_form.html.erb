@@ -1,0 +1,22 @@
+<%= form_for([@question,@questioncomment]) do |form| %>
+  <% if @questioncomment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(questioncomment.errors.count, "error") %> prohibited this questioncomment from being saved:</h2>
+
+      <ul>
+      <% @questioncomment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.text_area :texto, id: :questioncomment_texto , required: true,  size:"150x4" , placeholder:'Escribe un comentario' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit value="Crear comentario" %>
+  </div>
+<% end %>
