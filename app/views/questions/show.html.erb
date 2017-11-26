@@ -11,7 +11,8 @@
 		<td>Cuerpo de la pregunta: <br> <%= @question.texto %> <br>
 		-----------------------------------------------------------------------------------------------------
 		<br>
-		<strong>Escrito por:  <%= @question.user.email %> | fecha de creacion: <%= @question.created_at%> </td> </strong>
+		<strong>Escrito por:  <%= @question.user.email %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> | <%= button_to "Votar",  question_sumar_puntaje_path(@question), method: :post %> <!--question_path(@question),  :method => :sumar_puntaje %>  </td> </strong> -->
+
 	</tr>
 </table>
   

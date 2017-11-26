@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
+  before_action :set_puntaje, only:  [:create,:save]
 
   # GET /questions
   # GET /questions.json
@@ -63,9 +64,20 @@ class QuestionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+ def sumar_puntaje
+    @question=Question.find(params[:question_id])
+    if @question.puntaje.nil?
+      @question.puntaje=0
+    end
+    @question.update(puntaje: @question.puntaje + 1)
+    redirect_to @question
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+ 
+
+
     def set_question
       @question = Question.find(params[:id])
     end
@@ -73,5 +85,8 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:titulo, :texto)
+    end
+    def set_puntaje
+      @question.puntaje ||=0
     end
 end

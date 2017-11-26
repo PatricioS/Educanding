@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   resources :questioncomments
   resources :questions do
+      post 'sumar_puntaje'
       resources :questioncomments
   	  resources :answers do
   	  		resources :answercomments
