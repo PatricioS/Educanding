@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127032341) do
+ActiveRecord::Schema.define(version: 20171127193423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 20171127032341) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "has_tag_questions", force: :cascade do |t|
+    t.bigint "tag_id"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_has_tag_questions_on_question_id"
+    t.index ["tag_id"], name: "index_has_tag_questions_on_tag_id"
   end
 
   create_table "has_voto_answercomments", force: :cascade do |t|
@@ -145,6 +154,8 @@ ActiveRecord::Schema.define(version: 20171127032341) do
   add_foreign_key "answercomments", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "has_tag_questions", "questions"
+  add_foreign_key "has_tag_questions", "tags"
   add_foreign_key "has_voto_answercomments", "answercomments"
   add_foreign_key "has_voto_answercomments", "users"
   add_foreign_key "has_voto_answers", "answers"

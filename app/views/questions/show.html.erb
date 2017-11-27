@@ -11,7 +11,14 @@
 	<tr> 
 		<td><STRONG>Cuerpo de la pregunta:</STRONG> <br> <%= @question.texto %> <br>
 		-----------------------------------------------------------------------------------------------------
-		<br>
+		<br><strong>
+		Etiquetas:
+		<% @question.tags.each do |tag| %>
+			<%=link_to tag.nombre, tag %>
+    	<% end %></strong>
+    		<br>
+		-----------------------------------------------------------------------------------------------------
+	<br>
 		<strong>Escrito por:  <%= @question.user.email %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
 		<% if user_signed_in? %> 
 			<%if @question.user.email==current_user.email %>

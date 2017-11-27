@@ -1,5 +1,5 @@
 <%= form_with(model: tag, local: true) do |form| %>
-<br><br>
+
   <% if tag.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= form.label :nombre %>
-    <%= form.text_field :nombre, id: :tag_nombre %>
+    <%= form.text_field :nombre, id: :tag_nombre , required: true%>
   </div>
 
   <div class="actions">

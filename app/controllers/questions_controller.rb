@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
   before_action :set_puntaje, only:  [:save]
 
+
   # GET /questions
   # GET /questions.json
   def index
@@ -19,6 +20,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    @tags = Tag.all
   end
 
   # GET /questions/1/edit
@@ -30,6 +32,8 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     @question.puntaje= 0
+    @question.tags = params[:tags]
+    
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -87,7 +91,7 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:titulo, :texto)
+      params.require(:question).permit(:titulo, :texto, :tags)
     end
     def set_puntaje
       @question.puntaje ||=0

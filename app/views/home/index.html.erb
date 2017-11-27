@@ -30,9 +30,9 @@
         <div class="col-lg-10">
           <h1 class="my-5">Bienvenidos a Educanding.</h1>    
           <div class="list-group">
-            <a href="#" class="list-group-item active">Matematica</a>
-            <a href="#" class="list-group-item">Fisica</a>
-            <a href="#" class="list-group-item">Quimica</a>
+            <% Tag.all.each do |tag| %>
+             <a class="list-group-item" <%=link_to tag.nombre, tag%> </a>
+            <%end%>
           </div>
         </div>
         <!-- /.col-lg-3 

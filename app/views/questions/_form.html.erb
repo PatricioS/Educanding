@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+
+
   <div class="field">
     <%= form.text_field :titulo, id: :question_titulo, required: true ,placeholder:'Ingrese titulo' %>
   </div>
@@ -18,8 +20,20 @@
   <div class="field">
     <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
   </div>
+<%= javascript_include_tag "validacion" %>
+  <div class= "field">
+  <label>Etiquetas</label>
+  <% @tags.each do |tag| %>
+  <div class= "field">
+    <%= check_box_tag "tags[]", tag.id %> <%= tag.nombre %>
+    
+  </div>
+    
+  <%end%>
+</div>
 
   <div class="actions">
-    <%= form.submit value="Aceptar"%>
+    <%= submit_tag "Aceptar", onclick: "validarCheckbox();"%>
   </div>
 <% end %>
+

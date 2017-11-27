@@ -1,9 +1,23 @@
 <p id="notice"><%= notice %></p>
-
+<br>
+<br>
 <p>
-  <strong>Nombre:</strong>
-  <%= @tag.nombre %>
+  <h2><strong> <%= @tag.nombre %></strong></h2>
+ 
 </p>
+<h3>Preguntas formuladas:</h3>
+<% @tag.questions.each do |question| %>
+	<table>
+      <tr>
+      	<td><h4> <%=link_to question.titulo, question %> </td> </h4>
+      </tr>
+    <% end %>
+    </table>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+
+<br>
+<br>
+<br>
+<br>
+<!--<%= link_to 'Edit', edit_tag_path(@tag) %> |-->
+<h4><%= link_to 'Volver al listado de preguntas', tags_path %></h4>
