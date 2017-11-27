@@ -1,6 +1,9 @@
 
 
 Rails.application.routes.draw do
+  resources :tags
+  resources :tabs
+  resources :etiqueta
   resources :questions do
       post 'sumar_puntaje'
       resources :questioncomments do
