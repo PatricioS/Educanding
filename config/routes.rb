@@ -1,12 +1,13 @@
 
 
 Rails.application.routes.draw do
-  
-  resources :questioncomments
   resources :questions do
       post 'sumar_puntaje'
-      resources :questioncomments
+      resources :questioncomments do
+        post 'sumar_puntaje'
+      end
   	  resources :answers do
+          post'sumar_puntaje'
   	  		resources :answercomments
   	  	end
 

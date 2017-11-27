@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
-  before_action :set_puntaje, only:  [:create,:save]
+  before_action :set_puntaje, only:  [:save]
 
   # GET /questions
   # GET /questions.json
@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = current_user.questions.new(question_params)
-
+    @question.puntaje= 0
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -64,12 +64,15 @@ class QuestionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
  def sumar_puntaje
     @question=Question.find(params[:question_id])
     if @question.puntaje.nil?
       @question.puntaje=0
     end
     @question.update(puntaje: @question.puntaje + 1)
+    HasVotoQuestion.create(question_id: @question.id , user: current_user)
     redirect_to @question
   end
 

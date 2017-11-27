@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126121635) do
+ActiveRecord::Schema.define(version: 20171127000844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20171126121635) do
     t.text "texto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "puntaje"
     t.index ["answer_id"], name: "index_answercomments_on_answer_id"
     t.index ["user_id"], name: "index_answercomments_on_user_id"
   end
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 20171126121635) do
     t.text "texto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "puntaje"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -53,8 +55,33 @@ ActiveRecord::Schema.define(version: 20171126121635) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "universidad_id"
-    t.index ["universidad_id"], name: "index_facultads_on_universidad_id"
+  end
+
+  create_table "has_voto_answers", force: :cascade do |t|
+    t.bigint "answer_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_has_voto_answers_on_answer_id"
+    t.index ["user_id"], name: "index_has_voto_answers_on_user_id"
+  end
+
+  create_table "has_voto_questioncomments", force: :cascade do |t|
+    t.bigint "questioncomment_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questioncomment_id"], name: "index_has_voto_questioncomments_on_questioncomment_id"
+    t.index ["user_id"], name: "index_has_voto_questioncomments_on_user_id"
+  end
+
+  create_table "has_voto_questions", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_has_voto_questions_on_question_id"
+    t.index ["user_id"], name: "index_has_voto_questions_on_user_id"
   end
 
   create_table "questioncomments", force: :cascade do |t|
@@ -63,6 +90,7 @@ ActiveRecord::Schema.define(version: 20171126121635) do
     t.text "texto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "puntaje"
     t.index ["question_id"], name: "index_questioncomments_on_question_id"
     t.index ["user_id"], name: "index_questioncomments_on_user_id"
   end
@@ -102,6 +130,12 @@ ActiveRecord::Schema.define(version: 20171126121635) do
   add_foreign_key "answercomments", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "has_voto_answers", "answers"
+  add_foreign_key "has_voto_answers", "users"
+  add_foreign_key "has_voto_questioncomments", "questioncomments"
+  add_foreign_key "has_voto_questioncomments", "users"
+  add_foreign_key "has_voto_questions", "questions"
+  add_foreign_key "has_voto_questions", "users"
   add_foreign_key "questioncomments", "questions"
   add_foreign_key "questioncomments", "users"
   add_foreign_key "questions", "users"

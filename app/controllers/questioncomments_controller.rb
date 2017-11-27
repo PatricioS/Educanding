@@ -28,6 +28,7 @@ class QuestioncommentsController < ApplicationController
   def create
     @questioncomment = current_user.questioncomments.new(questioncomment_params)
     @questioncomment.question = @question
+    @questioncomment.puntaje = 0
 
     respond_to do |format|
       if @questioncomment.save
@@ -62,6 +63,16 @@ class QuestioncommentsController < ApplicationController
       format.html { redirect_to @question, notice: 'Questioncomment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+     def sumar_puntaje
+    @questioncomment=Questioncomment.find(params[:questioncomment_id])
+    if @questioncomment.puntaje.nil?
+      @questioncomment.puntaje=0
+    end
+    @questioncomment.update(puntaje: @questioncomment.puntaje + 1)
+    HasVotoQuestioncomment.create(questioncomment_id: @questioncomment.id , user: current_user)
+    redirect_to @questioncomment.question
   end
 
   private
