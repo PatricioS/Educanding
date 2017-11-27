@@ -10,3 +10,9 @@
 	Facultad.find_or_create_by(nombre: "Ciencias Economicas")
 	Facultad.find_or_create_by(nombre: "Informatica")
 	Facultad.find_or_create_by(nombre: "Medicina")	
+
+	Tag.create(nombre: "Fisica")
+	Tag.create(nombre: "Matematica")
+	Tag.create(nombre: "Quimica")
+	Tag.create(nombre: "Programacion")
+	Tag.create(nombre: "Software")
