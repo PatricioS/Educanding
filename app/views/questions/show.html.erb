@@ -47,11 +47,11 @@
 					-----------------------------------------------------------------------------------------------------
 					<br>
 					<strong>fecha de creacion: <%= questioncomment.created_at%> | Puntaje: <%= questioncomment.puntaje %> |  </strong>  
-					<% if questioncomment.user.email==current_user.email %>
-						<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
-						<%= link_to 'Borrar', question_questioncomment_path(@question,questioncomment),  :method => :delete %> |
-					<%end%>
 					<% if user_signed_in? %>
+						<% if questioncomment.user.email==current_user.email %>
+							<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
+							<%= link_to 'Borrar', question_questioncomment_path(@question,questioncomment),  :method => :delete %> |
+						<%end%>
 						<% if HasVotoQuestioncomment.where(questioncomment_id: questioncomment.id).where(user_id: current_user.id).any? %>
 							Ya votaste este comentario!
 						<% else %>
@@ -96,11 +96,12 @@
 			-----------------------------------------------------------------------------------------------------
 			<br>
 			<strong>fecha de creacion: <%= answer.created_at%> | Puntaje: <%= answer.puntaje %> | 
-			<% if answer.user.email==current_user.email %>
-				<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
-				<%= link_to 'Borrar', question_answer_path(@question,answer),  :method => :delete %> |
-			<%end%>
+			
 			<% if user_signed_in? %>
+				<% if answer.user.email==current_user.email %>
+					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+					<%= link_to 'Borrar', question_answer_path(@question,answer),  :method => :delete %> |
+				<%end%>
 				<% if HasVotoAnswer.where(answer_id: answer.id).where(user_id: current_user.id).any? %>
 					Ya votaste esta respuesta!
 				<% else %>
@@ -124,12 +125,12 @@
 					-----------------------------------------------------------------------------------------------------
 					<br>
 					<strong>fecha de creacion: <%= answercomment.created_at%> 
-					<% if answercomment.user.email==current_user.email %>
-						<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
-						<%= link_to 'Borrar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete %> |
-					<%end%>
 					| Puntaje: <%= answercomment.puntaje %> |  </strong> | 
 					<% if user_signed_in? %>
+						<% if answercomment.user.email==current_user.email %>
+							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+							<%= link_to 'Borrar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete %> |
+						<%end%>
 						<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
 							Ya votaste este comentario!
 						<% else %>
@@ -142,8 +143,10 @@
 			</table>
 
 			<%end%>
+			<% if user_signed_in? %>
 			<% @answer=answer%>
 			  <%= render "answercomments/form"  %>
+			 <%end%>
 		</td>
 	</table>
 
