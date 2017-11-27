@@ -6,13 +6,33 @@
  
 </p>
 <h3>Preguntas formuladas:</h3>
-<% @tag.questions.each do |question| %>
-	<table>
+
+
+<table BGCOLOR="#a9d0f5">
+  <thead>
+    <tr BGCOLOR="gray">
+      <th>Titulo</th>
+      <th>Texto</th>
+      <th>Autor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  	<% @tag.questions.each do |question| %>
       <tr>
-      	<td><h4> <%=link_to question.titulo, question %> </td> </h4>
+       <td> <strong><%= question.titulo %></strong></td> 
+        <td><%= question.texto %></td>
+        <td><%= question.user.email %></td>
+        <td><%= link_to 'Mostrar', question %></td>        
       </tr>
     <% end %>
-    </table>
+  </tbody>
+</table>
+
+<br>
+
+
 
 
 <br>
@@ -20,4 +40,4 @@
 <br>
 <br>
 <!--<%= link_to 'Edit', edit_tag_path(@tag) %> |-->
-<h4><%= link_to 'Volver al listado de preguntas', tags_path %></h4>
+<h4><%= link_to 'Volver al listado de etiquetas', tags_path %></h4>
