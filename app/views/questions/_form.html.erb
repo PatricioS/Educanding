@@ -12,16 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :titulo %>
-    <%= form.text_field :titulo, id: :question_titulo, required: true %>
+    <%= form.text_field :titulo, id: :question_titulo, required: true ,placeholder:'Ingrese titulo' %>
   </div>
 
   <div class="field">
-    <%= form.label :texto %>
-    <%= form.text_area :texto, id: :question_texto, required: true ,placeholder:'Escribe tu pregunta aqui'%>
+    <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit value="Aceptar"%>
   </div>
 <% end %>

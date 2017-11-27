@@ -8,7 +8,9 @@ Rails.application.routes.draw do
       end
   	  resources :answers do
           post'sumar_puntaje'
-  	  		resources :answercomments
+  	  		resources :answercomments do 
+            post'sumar_puntaje'
+          end
   	  	end
 
   	end

@@ -11,11 +11,17 @@
 		<td>Cuerpo de la pregunta: <br> <%= @question.texto %> <br>
 		-----------------------------------------------------------------------------------------------------
 		<br>
-		<strong>Escrito por:  <%= @question.user.email %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> | 
-		<% if HasVotoQuestion.where(question_id: @question.id).where(user_id: current_user.id).any? %>
-			Ya votaste esta pregunta!
-		<% else %>
-			<%= button_to "Votar",  question_sumar_puntaje_path(@question), method: :post %> <!--question_path(@question),  :method => :sumar_puntaje %>  </td> </strong> -->
+		<strong>Escrito por:  <%= @question.user.email %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
+		<% if user_signed_in? %> 
+			<%if @question.user.email==current_user.email %>
+				<%= link_to 'Editar', edit_question_path(@question) %>
+           		 <%= link_to 'Eliminar', @question, method: :delete, data: { confirm: '¿Estas seguro de realizar esta accion?' } %>
+           	<%end%>
+			<% if HasVotoQuestion.where(question_id: @question.id).where(user_id: current_user.id).any? %>
+				Ya votaste esta pregunta!
+			<% else %>
+				<%= button_to "Votar",  question_sumar_puntaje_path(@question), method: :post %> <!--question_path(@question),  :method => :sumar_puntaje %>  </td> </strong> -->
+			<%end%>
 		<%end%>
 		</strong>
 	</tr>
@@ -47,7 +53,7 @@
 					<%end%>
 					<% if user_signed_in? %>
 						<% if HasVotoQuestioncomment.where(questioncomment_id: questioncomment.id).where(user_id: current_user.id).any? %>
-							Ya votaste esta pregunta!
+							Ya votaste este comentario!
 						<% else %>
 							<%= button_to "Votar",  question_questioncomment_sumar_puntaje_path(@question,questioncomment), method: :post %> 
 						<%end%>
@@ -71,14 +77,12 @@
 
 
 <div class="field">
-
- <!-- <td><%= link_to 'Mostrar', @question_answer %></td> -->
-
+<% if @question.answers.any? %>
 <table frame="box" border="3" cellpadding="2" bordercolor="#000000" BGCOLOR="#a9a9f5" align="center" width="90%">
-<% if @question.questioncomments.any? %>
+
 	<h2 align="left">--------------------------------------------Respuestas--------------------------------------------</h2>
 	<tr></tr>
-	<%end%>
+
 	<td align="center">	<br>
 
 	<% @question.answers.each do |answer| %>
@@ -92,13 +96,13 @@
 			-----------------------------------------------------------------------------------------------------
 			<br>
 			<strong>fecha de creacion: <%= answer.created_at%> | Puntaje: <%= answer.puntaje %> | 
-			<%=link_to 'Mostrar', question_answer_path(@question,answer) %> 
 			<% if answer.user.email==current_user.email %>
 				<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+				<%= link_to 'Borrar', question_answer_path(@question,answer),  :method => :delete %> |
 			<%end%>
 			<% if user_signed_in? %>
 				<% if HasVotoAnswer.where(answer_id: answer.id).where(user_id: current_user.id).any? %>
-					Ya votaste esta pregunta!
+					Ya votaste esta respuesta!
 				<% else %>
 					<%= button_to "Votar",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
 				<%end%>
@@ -119,12 +123,27 @@
 					<td><br> <%= answercomment.texto %> <br>
 					-----------------------------------------------------------------------------------------------------
 					<br>
-					<strong>fecha de creacion: <%= answercomment.created_at%> </strong> | 
+					<strong>fecha de creacion: <%= answercomment.created_at%> 
+					<% if answercomment.user.email==current_user.email %>
+						<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+						<%= link_to 'Borrar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete %> |
+					<%end%>
+					| Puntaje: <%= answercomment.puntaje %> |  </strong> | 
+					<% if user_signed_in? %>
+						<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
+							Ya votaste este comentario!
+						<% else %>
+							<%= button_to "Votar",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post %> 
+						<%end%>
+					<% end %>
+					
 					</td>
 				</tr>
 			</table>
 
 			<%end%>
+			<% @answer=answer%>
+			  <%= render "answercomments/form"  %>
 		</td>
 	</table>
 
@@ -132,10 +151,12 @@
 	<%end%>
 	</td>
 </table>
+<%end%>
 
 <br>
   <% if user_signed_in? %>
-  <h1>Responder: </h1>
+  <% @answer=Answer.new%>
+  <h2>Responder: </h2>
   <%= render "answers/form" %>
   <%end%>
 

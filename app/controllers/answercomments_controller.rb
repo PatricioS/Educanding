@@ -30,6 +30,7 @@ class AnswercommentsController < ApplicationController
   def create
     @answercomment = current_user.answercomments.new(answercomment_params)
     @answercomment.answer = @answer
+    @answercomment.puntaje = 0
     
     respond_to do |format|
       if @answercomment.save
@@ -67,15 +68,14 @@ class AnswercommentsController < ApplicationController
     end
   end
 
-
    def sumar_puntaje
-    @questioncomment=Questioncomment.find(params[:questioncomment_id])
-    if @questioncomment.puntaje.nil?
-      @questioncomment.puntaje=0
+    @answercomment=Answercomment.find(params[:answercomment_id])
+    if @answercomment.puntaje.nil?
+      @answercomment.puntaje=0
     end
-    @questioncomment.update(puntaje: @questioncomment.puntaje + 1)
-    #HasVotoQuestioncomment.create(answer_id: @answer.id , user: current_user)
-    redirect_to @questioncomment.question
+    @answercomment.update(puntaje: @answercomment.puntaje + 1)
+    HasVotoAnswercomment.create(answercomment_id: @answercomment.id , user: current_user)
+    redirect_to @answercomment.answer.question
   end
 
   private

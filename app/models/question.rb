@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
 	belongs_to :user
-	has_many :answers
-	has_many :questioncomments
+	has_many :answers , dependent: :destroy
+	has_many :questioncomments , dependent: :destroy
 end
