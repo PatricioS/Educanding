@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
     @question.puntaje= 0
     @question.tags = params[:tags]
-    
+
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -79,6 +79,19 @@ class QuestionsController < ApplicationController
     HasVotoQuestion.create(question_id: @question.id , user: current_user)
     redirect_to @question
   end
+
+
+def restar_puntaje
+    @question=Question.find(params[:question_id])
+    if @question.puntaje.nil?
+      @question.puntaje=0
+    end
+    @question.update(puntaje: @question.puntaje - 1)
+    HasVotoQuestion.create(question_id: @question.id , user: current_user)
+    redirect_to @question
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

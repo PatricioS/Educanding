@@ -6,13 +6,17 @@ Rails.application.routes.draw do
   resources :etiqueta
   resources :questions do
       post 'sumar_puntaje'
+      post 'restar_puntaje'
       resources :questioncomments do
         post 'sumar_puntaje'
+        post 'restar_puntaje'
       end
   	  resources :answers do
           post'sumar_puntaje'
+          post 'restar_puntaje'
   	  		resources :answercomments do 
             post'sumar_puntaje'
+            post 'restar_puntaje'
           end
   	  	end
 

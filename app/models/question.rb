@@ -5,8 +5,9 @@ class Question < ApplicationRecord
 	has_many :has_tag_questions, dependent: :destroy
 	has_many :tags, through: :has_tag_questions
 	after_create :save_tags
-
+	default_scope { order(created_at: :desc)}
 	  #Custom setter
+	
   	def tags=(value)
   	  @tags = value
  	 end

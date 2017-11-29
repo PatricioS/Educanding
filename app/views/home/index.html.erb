@@ -19,7 +19,8 @@
   </head>
 
   <body>
-
+<br>
+<br>
     <!-- Navigation -->
 
     <!-- Page Content -->
@@ -27,8 +28,7 @@
 
       <div class="row center-xs">
 
-        <div class="col-lg-10">
-          <h1 class="my-5">Bienvenidos a Educanding.</h1>    
+        <div class="col-lg-10"> 
           <div class="list-group">
             <% Tag.all.each do |tag| %>
              <a class="list-group-item" <%=link_to tag.nombre, tag%> </a>
@@ -73,7 +73,42 @@
     <br>
 
 
-    <!-- Bootstrap core JavaScript -->
+
+          <div class="card card-outline-secondary my-4">
+            <div class="card-header" align="center">
+              Preguntas
+            </div>
+          </div>
+
+<table BGCOLOR="#d6dbdf" width="100%" align="center">
+  <thead>
+    <tr BGCOLOR="gray" >
+      <th>Titulo</th>
+      <th>Texto</th>
+      <th>Autor</th>
+      <th>Puntaje</th>
+      <th>Etiquetas</th>
+      <th>Fecha y hora</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Question.all.each do |question| %>
+      <tr>
+        <td><strong><%= link_to question.titulo, question %></strong> </td>
+        <td><%= question.texto %></td>
+        <td><%= question.user.email %></td>
+        <td><%= question.puntaje %> </td>
+        <td><% question.tags.each do |tag| %>
+         <%=link_to tag.nombre, tag %>
+        <% end %> </td>
+        <td><%= question["created_at"].strftime("%I: %M %p %d-%b-%y") %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

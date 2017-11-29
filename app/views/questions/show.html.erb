@@ -9,7 +9,8 @@
 		<th><strong>Titulo de la pregunta: <%= @question.titulo %></strong>	</th>
 	</tr>
 	<tr> 
-		<td><STRONG>Cuerpo de la pregunta:</STRONG> <br> <%= @question.texto %> <br>
+		<td><STRONG>Cuerpo de la pregunta:</STRONG> <br> <%= @question.texto %> <br> 
+
 		-----------------------------------------------------------------------------------------------------
 		<br><strong>
 		Etiquetas:
@@ -29,7 +30,10 @@
 			<% if HasVotoQuestion.where(question_id: @question.id).where(user_id: current_user.id).any? %>
 				Ya votaste esta pregunta!
 			<% else %>
-				<%= button_to "Votar",  question_sumar_puntaje_path(@question), method: :post %> <!--question_path(@question),  :method => :sumar_puntaje %>  </td> </strong> -->
+			<div allign="left">
+				<%= button_to "Votar +1",  question_sumar_puntaje_path(@question), method: :post %>
+				<%= button_to "Votar -1",  question_restar_puntaje_path(@question), method: :post %>  
+				</div>
 			<%end%>
 			<%end%>
 		<%end%>
@@ -66,7 +70,8 @@
 							<% if HasVotoQuestioncomment.where(questioncomment_id: questioncomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= button_to "Votar",  question_questioncomment_sumar_puntaje_path(@question,questioncomment), method: :post %> 
+								<%= button_to "Votar +1",  question_questioncomment_sumar_puntaje_path(@question,questioncomment), method: :post %>
+								<%= button_to "Votar -1",  question_questioncomment_restar_puntaje_path(@question,questioncomment), method: :post %> 
 							<%end%>
 						<%end%>
 					<% end %>
@@ -120,7 +125,8 @@
 					<% if HasVotoAnswer.where(answer_id: answer.id).where(user_id: current_user.id).any? %>
 						Ya votaste esta respuesta!
 					<% else %>
-						<%= button_to "Votar",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
+						<%= button_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
+						<%= button_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post %> 
 					<%end%>
 				<%end%>
 			<% end %>
@@ -151,7 +157,8 @@
 							<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= button_to "Votar",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post %> 
+								<%= button_to "Votar +1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post %> 
+								<%= button_to "Votar -1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post %> 
 							<%end%>
 						<%end%>
 					<% end %>

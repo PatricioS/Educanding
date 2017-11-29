@@ -16,3 +16,8 @@
 	Tag.create(nombre: "Quimica")
 	Tag.create(nombre: "Programacion")
 	Tag.create(nombre: "Software")
+	Tag.create(nombre: "Estadistica")
+	Tag.create(nombre: "Arquitectura")
+	Tag.create(nombre: "Diseño")
+	Tag.create(nombre: "Circuitos")
+	Tag.create(nombre: "Electronica")

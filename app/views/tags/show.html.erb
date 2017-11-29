@@ -3,34 +3,43 @@
 <br>
 <p>
   <h2><strong> <%= @tag.nombre %></strong></h2>
- 
+ 		
 </p>
-<h3>Preguntas formuladas:</h3>
+<% if @tag.questions.any? %>
+	<h3>Preguntas formuladas:</h3>
 
 
-<table BGCOLOR="#a9d0f5">
+<table BGCOLOR="#d6dbdf" width="100%" align="center">
   <thead>
-    <tr BGCOLOR="gray">
+    <tr BGCOLOR="gray" >
       <th>Titulo</th>
       <th>Texto</th>
       <th>Autor</th>
+      <th>Puntaje</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-  	<% @tag.questions.each do |question| %>
+    <% @tag.questions.each do |question| %>
       <tr>
-       <td> <strong><%= question.titulo %></strong></td> 
+        <td><%= question.titulo %></td>
         <td><%= question.texto %></td>
         <td><%= question.user.email %></td>
-        <td><%= link_to 'Mostrar', question %></td>        
+        <td><%= question.puntaje %> </td>
+        <td align="center" ><%= link_to 'Mostrar', question %></td>
+        
       </tr>
     <% end %>
   </tbody>
 </table>
 
+
 <br>
+<%else%>
+	<h4> No hay preguntas relacionadas para esta etiqueta :(</h4>
+<%end%>
+
 
 
 

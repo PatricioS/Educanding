@@ -75,6 +75,16 @@ class QuestioncommentsController < ApplicationController
     redirect_to @questioncomment.question
   end
 
+     def restar_puntaje
+    @questioncomment=Questioncomment.find(params[:questioncomment_id])
+    if @questioncomment.puntaje.nil?
+      @questioncomment.puntaje=0
+    end
+    @questioncomment.update(puntaje: @questioncomment.puntaje - 1)
+    HasVotoQuestioncomment.create(questioncomment_id: @questioncomment.id , user: current_user)
+    redirect_to @questioncomment.question
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
 

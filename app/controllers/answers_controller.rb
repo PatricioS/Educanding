@@ -77,6 +77,16 @@ class AnswersController < ApplicationController
     redirect_to @answer.question
   end
 
+  def restar_puntaje
+    @answer=Answer.find(params[:answer_id])
+    if @answer.puntaje.nil?
+      @answer.puntaje=0
+    end
+    @answer.update(puntaje: @answer.puntaje - 1)
+    HasVotoAnswer.create(answer_id: @answer.id , user: current_user)
+    redirect_to @answer.question
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
