@@ -5721,11 +5721,15 @@ a.bg-light:focus, a.bg-light:hover {
 }
 
 .bg-dark {
-  background-color: #2874a7 !important;
+  background-color: #2874a6 !important;
 }
 
 a.bg-dark:focus, a.bg-dark:hover {
   background-color: #2874a7 !important;
+}
+
+.bg-blue {
+  background-color: #2980b9 !important;
 }
 
 .bg-white {
