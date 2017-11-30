@@ -34,14 +34,25 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
     @question.puntaje= 0
     @question.tags = params[:tags]
-
     respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+      if params[:tags]!=nil
+        if params[:tags].length <6
+          if @question.save
+            format.html { redirect_to @question, notice: 'Question was successfully created.' }
+            format.json { render :show, status: :created, location: @question }
+          else
+            format.html { render :new }
+            format.json { render json: @question.errors, status: :unprocessable_entity }
+          end
+        else
+          @question.errors.add(:tags, "No se admiten mas de 5 etiquetas por pregunta")
+         format.html { render :new }
+         format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        @question.errors.add(:tags, "Necesitas elegir al menos 1 etiqueta")
+         format.html { render :new }
+         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,12 +63,24 @@ class QuestionsController < ApplicationController
     @question.tags=nil
     @question.tags = params[:tags]
     respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        if params[:tags]!=nil
+        if params[:tags].length <6
+          if @question.update(question_params)
+            format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+            format.json { render :show, status: :ok, location: @question }
+          else
+            format.html { render :edit }
+            format.json { render json: @question.errors, status: :unprocessable_entity }
+          end
+        else
+          @question.errors.add(:tags, "No se admiten mas de 5 etiquetas por pregunta")
+         format.html { render :new }
+         format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        @question.errors.add(:tags, "Necesitas elegir al menos 1 etiqueta")
+         format.html { render :new }
+         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -107,7 +130,7 @@ def restar_puntaje
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:titulo, :texto, :tags)
+      params.require(:question).permit(:titulo, :texto, {:tags => []})
     end
     def set_puntaje
       @question.puntaje ||=0

@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+        <%= javascript_include_tag "validacion" %>
+
 <div class="container">
   <div class="panel-center">
     <div class="card card-outline-secondary my-4">
@@ -25,7 +27,6 @@
         <div class="field">
           <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
         </div>
-        <%= javascript_include_tag "validacion" %>
         <%if current_user.facultad=="" %>
           <div class= "field">
            <label>Facultad</label>
@@ -35,7 +36,7 @@
         <hr>
         <div class= "field" align="left">
           <label>Etiquetas</label>
-          <% @tags.each do |tag| %>
+          <% Tag.all.each do |tag| %>
             <div class= "field">
               <%= check_box_tag "tags[]", tag.id %> <%= tag.nombre %>
             </div>
@@ -44,7 +45,7 @@
         </div>
 
       <div class="actions">
-          <%= submit_tag "Aceptar", onclick: "validarCheckbox();"%>
+          <%= submit_tag "Aceptar"%>
       </div>
               <hr>
       </div>
@@ -52,6 +53,18 @@
   </div>
 </div>
 
+<script>
+function Validar(){  
+    var tag = document.getElementsByName('tags[]');
+    for(var i = 0; i < tag.length; i++){
+            if(this.checked){
+                alert(this.value);
+            }
+        }
+    }
+    alert("flequillo")
+}
 
+</script>
 <% end %>
 

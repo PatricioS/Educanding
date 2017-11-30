@@ -8,6 +8,8 @@ class Question < ApplicationRecord
 	after_update :save_tags
 	before_update :del_tags
 	default_scope { order(created_at: :desc)}
+	#validate :tag_validate
+	#validates_associated :tags
 	  #Custom setter
 	
   	def tags=(value)
@@ -26,6 +28,4 @@ class Question < ApplicationRecord
         HasTagQuestion.create(tag_id: tag, question_id: self.id)
     end
   end
-
-
 end
