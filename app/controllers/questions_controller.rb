@@ -25,6 +25,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
+    @tags = Tag.all
   end
 
   # POST /questions
@@ -48,6 +49,8 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.tags=nil
+    @question.tags = params[:tags]
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -64,7 +67,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
