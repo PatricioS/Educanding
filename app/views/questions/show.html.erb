@@ -2,7 +2,7 @@
 
 <p>
 <br>
-<h3><strong><%= link_to 'Volver al listado de preguntas', questions_path %></strong></h3>
+<!--<h3><strong><%= link_to 'Volver al listado de preguntas', questions_path %></strong></h3>-->
 <br>
 <table width="50%" border="2" cellpadding="2" cellspacing="0" bordercolor="#000000" BGCOLOR="#f2f2f2">
 	<tr> 
@@ -88,7 +88,6 @@
 </table>
 
   <% if user_signed_in? %>
-  <h3>Comentar: </h3>
   	<%= render "questioncomments/form" %>
   <%end%>
 	
@@ -98,10 +97,16 @@
 <% if @question.answers.any? %>
 <table frame="box" border="3" cellpadding="2" bordercolor="#000000" BGCOLOR="#a9a9f5" align="center" width="90%">
 
-	<h2 align="left">--------------------------------------------Respuestas--------------------------------------------</h2>
 	<tr></tr>
-
+	<tr>
+	     <div class="card card-outline-secondary my-4">
+            <div class="card-header" align="center">
+              Respuestas
+            </div>
+          </div>
+    </tr>
 	<td align="center">	<br>
+
 
 	<% @question.answers.each do |answer| %>
 
@@ -184,6 +189,5 @@
 <br>
   <% if user_signed_in? %>
   <% @answer=Answer.new%>
-  <h2>Responder: </h2>
   <%= render "answers/form" %>
   <%end%>

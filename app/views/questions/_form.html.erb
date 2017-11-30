@@ -11,29 +11,47 @@
     </div>
   <% end %>
 
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        <h3>Pregunta</h3>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <%= form.text_field :titulo, id: :question_titulo, required: true ,placeholder:'Ingrese titulo' %>
+        </div>
 
-
-  <div class="field">
-    <%= form.text_field :titulo, id: :question_titulo, required: true ,placeholder:'Ingrese titulo' %>
-  </div>
-
-  <div class="field">
-    <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
-  </div>
-<%= javascript_include_tag "validacion" %>
-  <div class= "field">
-  <label>Etiquetas</label>
-  <% @tags.each do |tag| %>
-  <div class= "field">
-    <%= check_box_tag "tags[]", tag.id %> <%= tag.nombre %>
+        <div class="field">
+          <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
+        </div>
+        <%= javascript_include_tag "validacion" %>
+        <%if current_user.facultad=="" %>
+          <div class= "field">
+           <label>Facultad</label>
+           <%= form.select :facultad, Facultad.all.collect { |p| [ p.nombre] }%>
+          </div>
+        <%end%>
+        <hr>
+        <div class= "field" align="left">
+          <label>Etiquetas</label>
+          <% @tags.each do |tag| %>
+            <div class= "field">
+              <%= check_box_tag "tags[]", tag.id %> <%= tag.nombre %>
+            </div>
     
+          <%end%>
+        </div>
+
+      <div class="actions">
+          <%= submit_tag "Aceptar", onclick: "validarCheckbox();"%>
+      </div>
+              <hr>
+      </div>
+      </div>
   </div>
-    
-  <%end%>
 </div>
 
-  <div class="actions">
-    <%= submit_tag "Aceptar", onclick: "validarCheckbox();"%>
-  </div>
+
 <% end %>
 

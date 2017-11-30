@@ -12,12 +12,28 @@
     </div>
   <% end %>
 
-
-  <div class="field">
-    <%= form.text_area :texto, id: :answer_texto, required: true, size:"100x20", placeholder:'Escribe una respuesta' %>
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header" align="center">
+        <h3>Respuesta</h3>
+      </div>
+      <div class="card-body" align="center">
+          <div class="field">
+          <%= form.text_area :texto, id: :answer_texto, required: true, size:"100x20", placeholder:'Escribe una respuesta' %>
+          </div>
+      </div>
+         <hr>
+      <div class="actions" align="center">
+          <%= submit_tag "Crear respuesta", onclick: "validarCheckbox();"%>
+      </div>
+              <hr>
+      </div>
   </div>
+</div>
 
-  <div class="actions">
-    <%= form.submit value="Aceptar" %>
-  </div>
+
+
+
+
 <% end %>
