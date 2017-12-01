@@ -5,7 +5,7 @@ class Question < ApplicationRecord
 	has_many :has_tag_questions, dependent: :destroy
 	has_many :tags, through: :has_tag_questions
 	after_create :save_tags
-	after_update :save_tags
+	#after_update :save_tags
 	before_update :del_tags
 	default_scope { order(created_at: :desc)}
 	#validate :tag_validate

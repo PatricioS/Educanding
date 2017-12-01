@@ -26,6 +26,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @tags = Tag.all
+
   end
 
   # POST /questions
@@ -60,11 +61,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    @question.tags=nil
-    @question.tags = params[:tags]
     respond_to do |format|
-        if params[:tags]!=nil
-        if params[:tags].length <6
           if @question.update(question_params)
             format.html { redirect_to @question, notice: 'Question was successfully updated.' }
             format.json { render :show, status: :ok, location: @question }
@@ -72,22 +69,29 @@ class QuestionsController < ApplicationController
             format.html { render :edit }
             format.json { render json: @question.errors, status: :unprocessable_entity }
           end
-        else
-          @question.errors.add(:tags, "No se admiten mas de 5 etiquetas por pregunta")
-         format.html { render :new }
-         format.json { render json: @question.errors, status: :unprocessable_entity }
-        end
-      else
-        @question.errors.add(:tags, "Necesitas elegir al menos 1 etiqueta")
-         format.html { render :new }
-         format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
     end
   end
 
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
+    if @question.answers.any?
+      @question.answers.each do |answer|
+        if(answer.answercomments.any?)
+          answer.answercomments.each do |acomment|
+            HasVotoAnswercomment.where(answercomment_id: acomment.id).destroy_all
+          end
+        end
+        HasVotoAnswer.where(answer_id: answer.id).destroy_all
+      end
+    end
+    if @question.questioncomments.any?
+        @question.questioncomments.each do |qcomment|
+          HasVotoQuestioncomment.where(questioncomment_id: qcomment.id).destroy_all
+        end
+    end
+    HasVotoQuestion.where(question_id: @question.id).destroy_all
+
     @question.destroy
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Question was successfully destroyed.' }
