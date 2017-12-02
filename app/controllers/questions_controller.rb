@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   def show
         @questioncomment= Questioncomment.new
         @answercomment= Answercomment.new
+        @question.actualizar_visitas
   end
 
   # GET /questions/new
@@ -26,6 +27,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @tags = Tag.all
+    @question.ok=true
 
   end
 
@@ -34,6 +36,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     @question.puntaje= 0
+    @question.visitas=0;
     @question.tags = params[:tags]
     respond_to do |format|
       if params[:tags]!=nil
@@ -61,15 +64,43 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    respond_to do |format|
+    if(@question.ok == true)
+      @question.del_tags
+      @question.tags = params[:tags]
+      respond_to do |format|
+      if params[:tags]!=nil
+        if params[:tags].length <6
           if @question.update(question_params)
-            format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+            @question.save_tags
+            format.html { redirect_to @question, notice: 'La pregunta se actualizo correctamente' }
             format.json { render :show, status: :ok, location: @question }
           else
             format.html { render :edit }
             format.json { render json: @question.errors, status: :unprocessable_entity }
           end
+        else
+          @question.errors.add(:tags, "No se admiten mas de 5 etiquetas por pregunta")
+         format.html { render :edit }
+         format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
+      else
+        @question.errors.add(:tags, "Necesitas elegir al menos 1 etiqueta")
+         format.html { render :edit }
+         format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
+      end
+  else
+    respond_to do |format|
+        if @question.update(question_params)
+            format.html { redirect_to @question, notice: 'La pregunta se actualizo correctamente plox' }
+            format.json { render :show, status: :ok, location: @question }
+          else
+            format.html { render :edit }
+            format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
+      end
     end
+
   end
 
   # DELETE /questions/1
@@ -101,11 +132,13 @@ class QuestionsController < ApplicationController
 
 
  def sumar_puntaje
+    
     @question=Question.find(params[:question_id])
     if @question.puntaje.nil?
       @question.puntaje=0
     end
     @question.update(puntaje: @question.puntaje + 1)
+    @question.ok=false
     HasVotoQuestion.create(question_id: @question.id , user: current_user)
     redirect_to @question
   end
@@ -117,6 +150,7 @@ def restar_puntaje
       @question.puntaje=0
     end
     @question.update(puntaje: @question.puntaje - 1)
+    @question.ok=false
     HasVotoQuestion.create(question_id: @question.id , user: current_user)
     redirect_to @question
   end

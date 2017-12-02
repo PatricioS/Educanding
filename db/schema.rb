@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129035923) do
+ActiveRecord::Schema.define(version: 20171202131948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20171129035923) do
     t.bigint "user_id"
     t.integer "puntaje"
     t.bigint "facultad_id"
+    t.integer "visitas"
     t.index ["facultad_id"], name: "index_questions_on_facultad_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
