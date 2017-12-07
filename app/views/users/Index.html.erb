@@ -1,0 +1,7 @@
+<h1>Users#Index</h1>
+<p>Find me in app/views/users/Index.html.erb</p>
+
+<% User.all.each do |user| %>
+	<%= link_to user.email, user %> 
+	<hr>
+<%end%>

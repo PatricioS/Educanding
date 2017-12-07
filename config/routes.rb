@@ -1,6 +1,10 @@
 
 
 Rails.application.routes.draw do
+  match '/users', to: 'users#Index', via: 'get'
+  match '/users/show/:id', to: 'users#show', via: 'get'
+
+
   resources :tags
   resources :tabs
   resources :etiqueta
@@ -24,7 +28,9 @@ Rails.application.routes.draw do
     devise_for :users, controllers: {
       sessions: 'users/sessions',
       registrations: 'users/registrations'
+
     }
+    resources :users, :only => [:show]
     root 'home#index'
   end
 
