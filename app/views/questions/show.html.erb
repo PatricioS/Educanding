@@ -24,7 +24,7 @@
     		<br>
 		-----------------------------------------------------------------------------------------------------
 	<br>
-		<strong>Escrito por:  <%= @question.user.email %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
+		<strong>Escrito por: <%=link_to @question.user.email, @question.user %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
 		<% if user_signed_in? %> 
 			<%if @question.user.email==current_user.email %>
 				<%= link_to 'Editar', edit_question_path(@question) %>

@@ -27,16 +27,14 @@
         <div class="field">
           <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
         </div>
-        <%if current_user.facultad==nil %>
-          <div class= "field">
-           <label>Facultad</label>
-           <%= form.select  :facultad_id, Facultad.all.collect { |p|  [p.nombre, p.id] }%>
-
-            <!--<% Facultad.all.each do |facultad| %>
-           <div class= "field">
-              <%= check_box "facultad",  facultad.id %>) <%= facultad.nombre %>
-            </div>
-            <%end%>-->
+        <%if current_user.facultad.nombre== "" %>
+        
+            <div class= "field">
+            <label>Facultad</label>
+            <% @aux=Facultad.all %>
+            <%= form.select  :facultad_id, Facultad.all.collect { |p|  [p.nombre, p.id] }%>
+            <!--
+           -->
           </div>
         <%end%>
         <hr>

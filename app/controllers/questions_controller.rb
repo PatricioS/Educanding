@@ -39,19 +39,29 @@ class QuestionsController < ApplicationController
     @question.puntaje= 0
     @question.visitas=0
     @question.tags = params[:tags]
-    @question.facultad= Facultad.find(params[:question][:facultad_id])
+    if current_user.facultad.nombre== ""
+      @question.facultad= Facultad.find(params[:question][:facultad_id])
+    else
+      @question.facultad=current_user.facultad
+    end
     if @question.facultad_id==nil
       raise params.yaml
     end
     respond_to do |format|
       if params[:tags]!=nil
         if params[:tags].length <6
+          if @question.facultad.nombre== ""
+              @question.errors.add(:tags, "Necesitas elegir una facultad")
+              format.html { render :new }
+              format.json { render json: @question.errors, status: :unprocessable_entity }
+          else
           if @question.save
-            format.html { redirect_to @question, notice: 'Question was successfully created.' }
+            format.html { redirect_to @question, notice: 'La pregunta se creo correctamente' }
             format.json { render :show, status: :created, location: @question }
           else
             format.html { render :new }
             format.json { render json: @question.errors, status: :unprocessable_entity }
+          end
           end
         else
           @question.errors.add(:tags, "No se admiten mas de 5 etiquetas por pregunta")
