@@ -27,10 +27,16 @@
         <div class="field">
           <%= form.text_area :texto, id: :question_texto, required: true, size:"100x20" ,placeholder:'Escribe tu pregunta aqui'%>
         </div>
-        <%if current_user.facultad=="" %>
+        <%if current_user.facultad==nil %>
           <div class= "field">
            <label>Facultad</label>
-           <%= form.select :facultad, Facultad.all.collect { |p| [ p.nombre] }%>
+           <%= form.select  :facultad_id, Facultad.all.collect { |p|  [p.nombre, p.id] }%>
+
+            <!--<% Facultad.all.each do |facultad| %>
+           <div class= "field">
+              <%= check_box "facultad",  facultad.id %>) <%= facultad.nombre %>
+            </div>
+            <%end%>-->
           </div>
         <%end%>
         <hr>
@@ -52,19 +58,5 @@
       </div>
   </div>
 </div>
-
-<script>
-function Validar(){  
-    var tag = document.getElementsByName('tags[]');
-    for(var i = 0; i < tag.length; i++){
-            if(this.checked){
-                alert(this.value);
-            }
-        }
-    }
-    alert("flequillo")
-}
-
-</script>
 <% end %>
 

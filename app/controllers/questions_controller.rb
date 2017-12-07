@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
   before_action :set_puntaje, only:  [:save]
+  #before_action :set_facultad, only: [:create, :update]
 
 
   # GET /questions
@@ -36,8 +37,12 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     @question.puntaje= 0
-    @question.visitas=0;
+    @question.visitas=0
     @question.tags = params[:tags]
+    @question.facultad= Facultad.find(params[:question][:facultad_id])
+    if @question.facultad_id==nil
+      raise params.yaml
+    end
     respond_to do |format|
       if params[:tags]!=nil
         if params[:tags].length <6
@@ -156,19 +161,21 @@ def restar_puntaje
   end
 
 
-
+3000
   private
+
     # Use callbacks to share common setup or constraints between actions.
- 
 
-
+    def set_facultad
+      @facultad= Facultad.find(params[:facultad_id])
+    end
     def set_question
       @question = Question.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:titulo, :texto, {:tags => []})
+      params.require(:question).permit(:titulo, :texto, :facultad_id, {:tags => []})
     end
     def set_puntaje
       @question.puntaje ||=0

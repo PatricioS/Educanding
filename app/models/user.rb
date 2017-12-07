@@ -7,6 +7,7 @@ class User < ApplicationRecord
    has_many :answers
    has_many :answercomments
    has_many :questioncomments 
+   belongs_to :facultad
    before_create :set_puntaje_inicial
 
    private
