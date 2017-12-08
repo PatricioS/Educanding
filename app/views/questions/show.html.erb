@@ -19,7 +19,11 @@
 		<br><strong>
 		Etiquetas:
 		<% @question.tags.each do |tag| %>
-			<%=link_to tag.nombre, tag %>
+		  <%if tag.borrado == true %>
+          	<%=link_to tag.nombre, tag , style: "color:red"%>
+          <%else%>
+          	<%=link_to tag.nombre, tag , style: "color:blue"%>
+		  <%end%>
     	<% end %></strong>
     		<br>
 		-----------------------------------------------------------------------------------------------------

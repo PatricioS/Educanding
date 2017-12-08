@@ -55,11 +55,16 @@
   <tbody>
     <% Question.all.each do |question| %>
       <tr>
-        <td><strong><%= link_to question.titulo, question %></strong> </td>
+        <td><strong><%= link_to question.titulo, question , style: "color:blue" %></strong> </td>
         <td><%= question.texto %></td>
-        <td><%= question.user.email %></td>
+        <td><%= link_to question.user.email, question.user, style: "color:green" %></td>
         <td><% question.tags.each do |tag| %>
-         <%=link_to tag.nombre, tag %>
+
+           <%if tag.borrado == true %>
+            <%=link_to tag.nombre, tag , style: "color:red"%>
+          <%else%>
+            <%=link_to tag.nombre, tag , style: "color:blue"%>
+          <%end%>
         <% end %> </td>
         <td><%= question.puntaje %> </td>
         <td><%= question["created_at"].strftime("%I:%M %p %d-%b-%y") %></td>
