@@ -107,7 +107,7 @@ class QuestionsController < ApplicationController
   else
     respond_to do |format|
         if @question.update(question_params)
-            format.html { redirect_to @question, notice: 'La pregunta se actualizo correctamente plox' }
+            format.html { redirect_to @question, notice: 'La pregunta se actualizo correctamente' }
             format.json { render :show, status: :ok, location: @question }
           else
             format.html { render :edit }
@@ -137,10 +137,16 @@ class QuestionsController < ApplicationController
         end
     end
     HasVotoQuestion.where(question_id: @question.id).destroy_all
+    
+    @question.tags.where(borrado: true).each do |tag|
+      if tag.questions.length == 1
+        tag.destroy
+      end
+    end
 
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'La pregunta se borro correctamente' }
       format.json { head :no_content }
     end
   end

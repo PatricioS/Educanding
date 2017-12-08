@@ -14,14 +14,21 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= tag.nombre %></td>
-        <td><%= link_to 'Mostrar', tag %></td>
+        <% if tag.borrado == true %>
+          <td style="color:red"><%= tag.nombre %> </td>
+          <td><%= link_to 'Mostrar', tag %></td>
+          <%else%>
+          <td><%= tag.nombre %></td>
+           <td><%= link_to 'Mostrar', tag %></td>
         <% if user_signed_in? %>
-        <% if current_user.email=="administrador@gmail.com" %>
+        <% if current_user.email=="administrador@educanding.com" %>
          <td><%= link_to 'Editar', edit_tag_path(tag) %></td>
           <td><%= link_to 'Eliminar', tag, method: :delete, data: { confirm: '¿Esta seguro?' } %></td>
        <% end %>
        <% end %>
+        <%end%>
+        
+       
        </tr>
     <% end %>
   </tbody>

@@ -25,7 +25,7 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
-
+    @tag.borrado=false;
     respond_to do |format|
       if @tag.save
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
@@ -54,10 +54,19 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
+    if @tag.questions.any?
+      @tag.update(borrado: true)
+      respond_to do |format|
+      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+    else
+
     @tag.destroy
     respond_to do |format|
       format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
       format.json { head :no_content }
+    end
     end
   end
 

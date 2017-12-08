@@ -40,7 +40,7 @@
         <hr>
         <div class= "field" align="left">
           <label>Etiquetas</label>
-          <% Tag.all.each do |tag| %>
+          <% Tag.where(borrado: false).each do |tag| %>
             <div class= "field">
               <%= check_box_tag "tags[]", tag.id %> <%= tag.nombre %>
             </div>
