@@ -34,6 +34,8 @@ class Question < ApplicationRecord
         HasTagQuestion.create(tag_id: tag, question_id: self.id)
     end
   end
+
+
   def  ok
   	@ok=true
   end

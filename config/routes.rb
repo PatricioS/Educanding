@@ -1,6 +1,8 @@
 
 
 Rails.application.routes.draw do
+  get 'search/create'
+
   resources :permisos
   resources :facultads
   match '/users', to: 'users#Index', via: 'get'

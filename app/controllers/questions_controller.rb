@@ -8,7 +8,11 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
+    #@questions = Question.all
     @questions = Question.all
+    if params[:titulo].present?
+      @questions=@questions.where("titulo ILIKE ?", "%#{params[:titulo]}%")
+    end
   end
 
   # GET /questions/1
