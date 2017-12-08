@@ -1,0 +1,52 @@
+<%= form_with(model: permiso, local: true) do |form| %>
+  <% if permiso.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(permiso.errors.count, "error") %> prohibited this permiso from being saved:</h2>
+
+      <ul>
+      <% permiso.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :crearpost %>
+    <%= form.number_field :crearpost, id: :permiso_crearpost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :votarpostivo %>
+    <%= form.number_field :votarpostivo, id: :permiso_votarpostivo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comentar %>
+    <%= form.number_field :comentar, id: :permiso_comentar %>
+  </div>
+
+  <div class="field">
+    <%= form.label :votarnegativo %>
+    <%= form.number_field :votarnegativo, id: :permiso_votarnegativo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :etiqueta %>
+    <%= form.number_field :etiqueta, id: :permiso_etiqueta %>
+  </div>
+
+  <div class="field">
+    <%= form.label :facultad %>
+    <%= form.number_field :facultad, id: :permiso_facultad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin %>
+    <%= form.number_field :admin, id: :permiso_admin %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

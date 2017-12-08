@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Permisos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Crearpost</th>
+      <th>Votarpostivo</th>
+      <th>Comentar</th>
+      <th>Votarnegativo</th>
+      <th>Etiqueta</th>
+      <th>Facultad</th>
+      <th>Admin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @permisos.each do |permiso| %>
+      <tr>
+        <td><%= permiso.crearpost %></td>
+        <td><%= permiso.votarpostivo %></td>
+        <td><%= permiso.comentar %></td>
+        <td><%= permiso.votarnegativo %></td>
+        <td><%= permiso.etiqueta %></td>
+        <td><%= permiso.facultad %></td>
+        <td><%= permiso.admin %></td>
+        <!--<td><%= link_to 'Show', permiso %></td>-->
+        <td><%= link_to 'Edit', edit_permiso_path(permiso) %></td>
+        <!--<td><%= link_to 'Destroy', permiso, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

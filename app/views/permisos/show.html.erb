@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Crearpost:</strong>
+  <%= @permiso.crearpost %>
+</p>
+
+<p>
+  <strong>Votarpostivo:</strong>
+  <%= @permiso.votarpostivo %>
+</p>
+
+<p>
+  <strong>Comentar:</strong>
+  <%= @permiso.comentar %>
+</p>
+
+<p>
+  <strong>Votarnegativo:</strong>
+  <%= @permiso.votarnegativo %>
+</p>
+
+<p>
+  <strong>Etiqueta:</strong>
+  <%= @permiso.etiqueta %>
+</p>
+
+<p>
+  <strong>Facultad:</strong>
+  <%= @permiso.facultad %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @permiso.admin %>
+</p>
+
+<%= link_to 'Edit', edit_permiso_path(@permiso) %> |
+<%= link_to 'Back', permisos_path %>

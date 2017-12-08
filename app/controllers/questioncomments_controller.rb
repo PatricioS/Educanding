@@ -71,6 +71,7 @@ class QuestioncommentsController < ApplicationController
       @questioncomment.puntaje=0
     end
     @questioncomment.update(puntaje: @questioncomment.puntaje + 1)
+    @questioncomment.user.update(puntaje: @questioncomment.user.puntaje + 5)
     HasVotoQuestioncomment.create(questioncomment_id: @questioncomment.id , user: current_user)
     redirect_to @questioncomment.question
   end
@@ -79,6 +80,14 @@ class QuestioncommentsController < ApplicationController
     @questioncomment=Questioncomment.find(params[:questioncomment_id])
     if @questioncomment.puntaje.nil?
       @questioncomment.puntaje=0
+    end
+      if @questioncomment.user.puntaje - 2 < 1
+       @questioncomment.user.update(puntaje:  1)
+    else
+      @questioncomment.user.update(puntaje:  @questioncomment.user.puntaje - 2)
+    end
+    if current_user.puntaje > 1
+      current_user.update(puntaje: current_user.puntaje - 1 )
     end
     @questioncomment.update(puntaje: @questioncomment.puntaje - 1)
     HasVotoQuestioncomment.create(questioncomment_id: @questioncomment.id , user: current_user)

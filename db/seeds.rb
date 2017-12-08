@@ -22,3 +22,5 @@
 	Tag.find_or_create_by(nombre: "Diseño")
 	Tag.find_or_create_by(nombre: "Circuitos")
 	Tag.find_or_create_by(nombre: "Electronica")
+
+	Permiso.find_or_create_by(crearpost: 1,comentar: 20, votarpostivo: 15, votarnegativo: 100, etiqueta:300, facultad:500, admin:1000)

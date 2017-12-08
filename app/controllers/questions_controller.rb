@@ -154,6 +154,7 @@ class QuestionsController < ApplicationController
     end
     @question.update(puntaje: @question.puntaje + 1)
     @question.ok=false
+    @question.user.update(puntaje:  @question.user.puntaje + 5)
     HasVotoQuestion.create(question_id: @question.id , user: current_user)
     redirect_to @question
   end
@@ -165,6 +166,15 @@ def restar_puntaje
       @question.puntaje=0
     end
     @question.update(puntaje: @question.puntaje - 1)
+    if @question.user.puntaje - 2 < 1
+       @question.user.update(puntaje:  1)
+    else
+      @question.user.update(puntaje:  @question.user.puntaje - 2)
+    end
+    if current_user.puntaje > 1
+      current_user.update(puntaje: current_user.puntaje - 1 )
+    end
+
     @question.ok=false
     HasVotoQuestion.create(question_id: @question.id , user: current_user)
     redirect_to @question

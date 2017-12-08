@@ -74,6 +74,7 @@ class AnswersController < ApplicationController
     end
     @answer.update(puntaje: @answer.puntaje + 1)
     HasVotoAnswer.create(answer_id: @answer.id , user: current_user)
+    @answer.user.update(puntaje: @answer.user.puntaje + 10)
     redirect_to @answer.question
   end
 
@@ -84,6 +85,14 @@ class AnswersController < ApplicationController
     end
     @answer.update(puntaje: @answer.puntaje - 1)
     HasVotoAnswer.create(answer_id: @answer.id , user: current_user)
+    if @answer.user.puntaje - 2 < 1
+       @answer.user.update(puntaje:  1)
+    else
+      @answer.user.update(puntaje:  @answer.user.puntaje - 2)
+    end
+    if current_user.puntaje > 1
+      current_user.update(puntaje: current_user.puntaje - 1 )
+    end
     redirect_to @answer.question
   end
 

@@ -1,6 +1,8 @@
 
 
 Rails.application.routes.draw do
+  resources :permisos
+  resources :facultads
   match '/users', to: 'users#Index', via: 'get'
   match '/users/show/:id', to: 'users#show', via: 'get'
 

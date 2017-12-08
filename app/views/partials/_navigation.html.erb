@@ -48,8 +48,15 @@
               <a class="nav-link" style="color:white" href="../../../tags">Etiquetas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="color:white" href="#">Contacto</a>
+              <a class="nav-link" style="color:white" href="../../../../../facultads">Facultades</a>
             </li>
+          <% if user_signed_in? %>  
+            <% if current_user.email=="administrador@educanding.com" %>
+          <li class="nav-item">
+              <a class="nav-link" style="color:white" href="../../../../../permisos">Permisos</a>
+            </li>
+            <%end%>
+               <%end%>
           </ul>
         </div>
       </div>

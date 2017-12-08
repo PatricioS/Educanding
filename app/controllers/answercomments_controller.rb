@@ -74,6 +74,7 @@ class AnswercommentsController < ApplicationController
       @answercomment.puntaje=0
     end
     @answercomment.update(puntaje: @answercomment.puntaje + 1)
+    @answercomment.user.update(puntaje: @answercomment.user.puntaje + 5)
     HasVotoAnswercomment.create(answercomment_id: @answercomment.id , user: current_user)
     redirect_to @answercomment.answer.question
   end
@@ -84,6 +85,16 @@ class AnswercommentsController < ApplicationController
       @answercomment.puntaje=0
     end
     @answercomment.update(puntaje: @answercomment.puntaje - 1)
+
+    if @answercomment.user.puntaje - 2 < 1
+       @answercomment.user.update(puntaje:  1)
+    else
+      @answercomment.user.update(puntaje:  @answercomment.user.puntaje - 2)
+    end
+    if current_user.puntaje > 1
+      current_user.update(puntaje: current_user.puntaje - 1 )
+    end
+    
     HasVotoAnswercomment.create(answercomment_id: @answercomment.id , user: current_user)
     redirect_to @answercomment.answer.question
   end
