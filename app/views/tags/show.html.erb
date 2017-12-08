@@ -6,16 +6,19 @@
  		
 </p>
 <% if @tag.questions.any? %>
-	<h3>Preguntas formuladas:</h3>
+	<hr>
 
 
 <table BGCOLOR="#d6dbdf" width="100%" align="center">
   <thead>
-    <tr BGCOLOR="gray" >
-      <th>Titulo</th>
-      <th>Texto</th>
-      <th>Autor</th>
-      <th>Puntaje</th>
+    <tr BGCOLOR="#2e4053" >
+      <th style="color:white"> &nbsp; Titulo</th>
+      <th style="color:white">Texto</th>
+      <th style="color:white">Autor</th>
+      <th style="color:white">Respuestas</th>
+      <th style="color:white">Etiquetas</th>
+      <th style="color:white">Puntaje</th>
+      <th style="color:white">Fecha y hora</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,11 +26,20 @@
   <tbody>
     <% @tag.questions.each do |question| %>
       <tr>
-        <td><%= question.titulo %></td>
+        <td><strong><%= link_to question.titulo, question , style: "color:blue" %></strong> </td>
         <td><%= question.texto %></td>
-        <td><%= question.user.email %></td>
+        <td><%= link_to question.user.email, question.user, style: "color:green" %></td>
+        <td><%=question.cant_answers%></td>
+        <td><% question.tags.each do |tag| %>
+
+           <%if tag.borrado == true %>
+            <%=link_to tag.nombre, tag , style: "color:red"%>
+          <%else%>
+            <%=link_to tag.nombre, tag , style: "color:blue"%>
+          <%end%>
+        <% end %> </td>
         <td><%= question.puntaje %> </td>
-        <td align="center" ><%= link_to 'Mostrar', question %></td>
+        <td><%= question["created_at"].strftime("%I:%M %p %d-%b-%y") %></td>
         
       </tr>
     <% end %>

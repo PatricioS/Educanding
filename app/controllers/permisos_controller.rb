@@ -42,7 +42,7 @@ class PermisosController < ApplicationController
   def update
     respond_to do |format|
       if @permiso.update(permiso_params)
-        format.html { redirect_to @permiso, notice: 'Permiso was successfully updated.' }
+        format.html { redirect_to @permiso, notice: 'Permisos actualizados.' }
         format.json { render :show, status: :ok, location: @permiso }
       else
         format.html { render :edit }

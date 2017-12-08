@@ -28,7 +28,7 @@ class EtiquetaController < ApplicationController
 
     respond_to do |format|
       if @etiquetum.save
-        format.html { redirect_to @etiquetum, notice: 'Etiquetum was successfully created.' }
+        format.html { redirect_to @etiquetum, notice: 'Etiqueta creada!' }
         format.json { render :show, status: :created, location: @etiquetum }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EtiquetaController < ApplicationController
   def update
     respond_to do |format|
       if @etiquetum.update(etiquetum_params)
-        format.html { redirect_to @etiquetum, notice: 'Etiquetum was successfully updated.' }
+        format.html { redirect_to @etiquetum, notice: 'Etiqueta actualizada!' }
         format.json { render :show, status: :ok, location: @etiquetum }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class EtiquetaController < ApplicationController
   def destroy
     @etiquetum.destroy
     respond_to do |format|
-      format.html { redirect_to etiqueta_url, notice: 'Etiquetum was successfully destroyed.' }
+      format.html { redirect_to etiqueta_url, notice: 'Etiqueta borrada!' }
       format.json { head :no_content }
     end
   end

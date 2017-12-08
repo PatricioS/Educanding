@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208045151) do
+ActiveRecord::Schema.define(version: 20171208213012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20171208045151) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "puntaje"
+    t.boolean "best"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 20171208045151) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cant_questions"
   end
 
   create_table "has_tag_questions", force: :cascade do |t|
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 20171208045151) do
     t.integer "puntaje"
     t.bigint "facultad_id"
     t.integer "visitas"
+    t.integer "cant_answers"
     t.index ["facultad_id"], name: "index_questions_on_facultad_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end

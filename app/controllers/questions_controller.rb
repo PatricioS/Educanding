@@ -42,6 +42,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
     @question.puntaje= 0
     @question.visitas=0
+    @question.cant_answers = 0
     @question.tags = params[:tags]
     if current_user.facultad.nombre== ""
       @question.facultad= Facultad.find(params[:question][:facultad_id])

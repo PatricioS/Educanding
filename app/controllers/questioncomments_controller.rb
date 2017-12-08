@@ -32,7 +32,7 @@ class QuestioncommentsController < ApplicationController
 
     respond_to do |format|
       if @questioncomment.save
-        format.html { redirect_to @questioncomment.question, notice: 'Questioncomment was successfully created.' }
+        format.html { redirect_to @questioncomment.question, notice: 'Comentario de pregunta creado.' }
         format.json { render :show, status: :created, location: @questioncomment }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class QuestioncommentsController < ApplicationController
   def update
     respond_to do |format|
       if @questioncomment.update(questioncomment_params)
-        format.html { redirect_to @questioncomment.question, notice: 'Questioncomment was successfully updated.' }
+        format.html { redirect_to @questioncomment.question, notice: 'Comentario de pregunta actualizado.' }
         format.json { render :show, status: :ok, location: @questioncomment }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class QuestioncommentsController < ApplicationController
   def destroy
     @questioncomment.destroy
     respond_to do |format|
-      format.html { redirect_to @question, notice: 'Questioncomment was successfully destroyed.' }
+      format.html { redirect_to @question, notice: 'Comentario de pregunta borrado.' }
       format.json { head :no_content }
     end
   end

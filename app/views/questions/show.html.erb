@@ -122,7 +122,93 @@
 	<td align="center">	<br>
 
 
-	<% @question.answers.each do |answer| %>
+
+		<h3> Mejor Respuesta </h3>
+		<% @question.answers.where(best: true).each do |answer| %>
+		<table width="90%" border="10" cellpadding="2" cellspacing="0" bordercolor="#2980b9" BGCOLOR="#fafafa" >
+		<tr> 
+			<th BGCOLOR="#89daf5" ><strong>Respuesta del usuario: <%=link_to answer.user.email , answer.user%> </strong>	</th>
+		</tr>
+		<tr> 
+			<td><br> <%= answer.texto %> <br>
+			-----------------------------------------------------------------------------------------------------
+			<br>
+			<strong>fecha de creacion: <%= answer.created_at%> | Puntaje: <%= answer.puntaje %> | 
+			
+			<% if user_signed_in? %>
+				<% if answer.user.email==current_user.email %>
+					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete %> |
+				<%end%>
+				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
+					<%=button_to 'Elegir como Mejor respuesta', question_answer_mejor_respuesta_path(@question,answer),method: :post , style: "color:darkgreen" %>
+				<%end%>
+				<% if answer.user.email!=current_user.email %>
+					<% if HasVotoAnswer.where(answer_id: answer.id).where(user_id: current_user.id).any? %>
+						Ya votaste esta respuesta!
+					<% else %>	
+						<hr>
+						<%= button_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
+						<%= button_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post %> 
+					<%end%>
+				<%end%>
+			<% end %>
+			</strong> 
+			</td>
+		</tr>
+			<br>
+		<td align="center" BGCOLOR="#e0e6f8">
+		
+			<% answer.answercomments.each do |answercomment| %>
+			<table width="80%" border="3" cellpadding="2" cellspacing="1" bordercolor="#000000" BGCOLOR="#f2f2f1" >
+				<tr> 
+				<br><br>
+					<th><strong>Comentario del usuario:<%=link_to answercomment.user.email  , answercomment.user%> </strong>	</th>
+				</tr>
+				<tr> 
+					<td><br> <%= answercomment.texto %> <br>
+					-----------------------------------------------------------------------------------------------------
+					<br>
+					<strong>fecha de creacion: <%= answercomment.created_at%> 
+					| Puntaje: <%= answercomment.puntaje %> |  | 
+					<% if user_signed_in? %>
+						<% if answercomment.user.email==current_user.email %>
+							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete %> |
+						<%end%>
+						<% if answercomment.user.email!=current_user.email %>
+							<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
+								Ya votaste este comentario!
+							<% else %>
+								<%= button_to "Votar +1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post %> 
+								<%= button_to "Votar -1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post %> 
+							<%end%>
+						<%end%>
+					<% end %>
+					</strong> 
+					</td>
+				</tr>
+			</table>
+
+			<%end%>
+			<% if user_signed_in? %>
+			<% @answer=answer%>
+			  <%= render "answercomments/form"  %>
+			 <%end%>
+		</td>
+	</table>
+
+
+	<%end%>
+
+	<hr>
+	<hr>
+	<hr>
+
+
+
+
+	<% @question.answers.where(best: false).each do |answer| %>
 
 	<table width="90%" border="2" cellpadding="2" cellspacing="0" bordercolor="#000000" BGCOLOR="#fafafa" >
 		<tr> 
@@ -139,11 +225,14 @@
 					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
 					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete %> |
 				<%end%>
-
+				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
+					<%=button_to 'Elegir como Mejor respuesta', question_answer_mejor_respuesta_path(@question,answer),method: :post , style: "color:darkgreen" %>
+				<%end%>
 				<% if answer.user.email!=current_user.email %>
 					<% if HasVotoAnswer.where(answer_id: answer.id).where(user_id: current_user.id).any? %>
 						Ya votaste esta respuesta!
-					<% else %>
+					<% else %>	
+						<hr>
 						<%= button_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
 						<%= button_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post %> 
 					<%end%>

@@ -21,11 +21,13 @@
           <strong>Puntaje: </strong><%=@user.puntaje %>
         </div>
         <hr>
+       <% if user_signed_in?%>
         <%if @user.email == current_user.email%>
         	<div>
 			<%=link_to 'Editar Perfil', edit_user_registration_path, class: "btn btn-primary", style: "color:white" %>
 			<%= link_to "Cambiar contraseña", edit_user_path, class: "btn btn-primary", style: "color:white" %>
 			</div>
+		<% end %>
 		<% end %>
       </div>
       </div>

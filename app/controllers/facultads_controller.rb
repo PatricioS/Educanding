@@ -25,10 +25,10 @@ class FacultadsController < ApplicationController
   # POST /facultads.json
   def create
     @facultad = Facultad.new(facultad_params)
-
+    @facultad.cant_questions = 0
     respond_to do |format|
       if @facultad.save
-        format.html { redirect_to @facultad, notice: 'Facultad was successfully created.' }
+        format.html { redirect_to @facultad, notice: 'Facultad creada!' }
         format.json { render :show, status: :created, location: @facultad }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class FacultadsController < ApplicationController
   def update
     respond_to do |format|
       if @facultad.update(facultad_params)
-        format.html { redirect_to @facultad, notice: 'Facultad was successfully updated.' }
+        format.html { redirect_to @facultad, notice: 'Facultad actualizada!' }
         format.json { render :show, status: :ok, location: @facultad }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class FacultadsController < ApplicationController
   def destroy
     @facultad.destroy
     respond_to do |format|
-      format.html { redirect_to facultads_url, notice: 'Facultad was successfully destroyed.' }
+      format.html { redirect_to facultads_url, notice: 'Facultad borrada!' }
       format.json { head :no_content }
     end
   end

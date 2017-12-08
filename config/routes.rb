@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         post 'restar_puntaje'
       end
   	  resources :answers do
+          post 'mejor_respuesta'
           post'sumar_puntaje'
           post 'restar_puntaje'
   	  		resources :answercomments do 

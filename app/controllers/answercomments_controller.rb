@@ -34,7 +34,7 @@ class AnswercommentsController < ApplicationController
     
     respond_to do |format|
       if @answercomment.save
-        format.html { redirect_to @answercomment.answer.question , notice: 'Answercomment was successfully created.' }
+        format.html { redirect_to @answercomment.answer.question , notice: 'El comentario de respuesta fue creado exitosamente' }
         format.json { render :show, status: :created, location: @answercomment }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class AnswercommentsController < ApplicationController
   def update
     respond_to do |format|
       if @answercomment.update(answercomment_params)
-        format.html { redirect_to @answercomment.answer.question , notice: 'Answercomment was successfully updated.'  }
+        format.html { redirect_to @answercomment.answer.question , notice: 'El comentario de respuesta fue actualizado exitosamente'  }
         format.json { render :show, status: :ok, location: @answercomment }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class AnswercommentsController < ApplicationController
     @answer=@answercomment.answer
     @answercomment.destroy
     respond_to do |format|
-      format.html { redirect_to @question, notice: 'Answercomment was successfully destroyed.' }
+      format.html { redirect_to @question, notice: 'El comentario de respuesta fue borrado de manera exitosa' }
       format.json { head :no_content }
     end
   end
@@ -94,7 +94,7 @@ class AnswercommentsController < ApplicationController
     if current_user.puntaje > 1
       current_user.update(puntaje: current_user.puntaje - 1 )
     end
-    
+
     HasVotoAnswercomment.create(answercomment_id: @answercomment.id , user: current_user)
     redirect_to @answercomment.answer.question
   end
