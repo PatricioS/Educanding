@@ -62,7 +62,8 @@
          <%=link_to tag.nombre, tag %>
         <% end %> </td>
         <td><%= question.puntaje %> </td>
-        <td><%= question["created_at"].strftime("%I: %M %p %d-%b-%y") %></td>
+        <td><%= question["created_at"].strftime("%I:%M %p %d-%b-%y") %></td>
+        <td><%= link_to 'Mostrar', question %></td> 
         
       </tr>
     <% end %>

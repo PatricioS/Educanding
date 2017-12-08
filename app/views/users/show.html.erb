@@ -1,1 +1,40 @@
-<h1> <%= @user.email%> <h1>
+<div class="perfil-content">
+		<div class="title clearfix">
+			<h2>Informacion de <%= @user.email%> </h2>
+		</div>
+		<ul>
+										<li>
+				<label><strong>Nombre</strong></label>
+							<%= @user.nombre %>  
+			</li>
+				<br>
+							<li>
+				<label><strong>Apellido</strong></label>
+				<%= @user.apellido %>
+							</li>				
+			<br>
+			<li>
+					<label><strong>Facultad</strong></label>
+					<% if @user.facultad.nombre == "" %>
+						<%= "El usuario no cuenta con una facultad" %>
+					<%else%>
+						<%= @user.facultad.nombre %>
+					<%end%>
+				</li>
+			<br>
+					<li>
+				<label><strong>Puntaje</strong></label>
+				El usuario cuenta con <%= @user.puntaje  %> puntos
+							</li>
+			<br>
+						<li>
+				<label><strong>Es usuario desde</strong></label>
+				
+					<%= @user.created_at.strftime("%I:%M %p %d-%b-%y") %>				
+			</li>
+</div>
+<%if @user.email == current_user.email%>
+			<%=link_to 'Editar Perfil', edit_user_registration_path, class: "btn btn-primary", style: "color:white" %>
+<% end %>
+<br>
+</div>

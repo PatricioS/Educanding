@@ -15,11 +15,11 @@
     <% @tags.each do |tag| %>
       <tr>
         <td><%= tag.nombre %></td>
-        <td><%= link_to 'Show', tag %></td>
+        <td><%= link_to 'Mostrar', tag %></td>
         <% if user_signed_in? %>
         <% if current_user.email=="administrador@gmail.com" %>
-         <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-          <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><%= link_to 'Editar', edit_tag_path(tag) %></td>
+          <td><%= link_to 'Eliminar', tag, method: :delete, data: { confirm: '¿Esta seguro?' } %></td>
        <% end %>
        <% end %>
        </tr>
@@ -29,5 +29,5 @@
 
 <br>
  <% if user_signed_in? %>
-<%= link_to 'New Tag', new_tag_path %>
+<%= link_to 'Nueva Etiqueta', new_tag_path %>
 <%end%>
