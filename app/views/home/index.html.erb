@@ -59,6 +59,7 @@
       <th style="color:white"> &nbsp; Titulo</th>
       <th style="color:white">Texto</th>
       <th style="color:white">Autor</th>
+      <th style="color:white">Facultad</th>
       <th style="color:white">Respuestas</th>
       <th style="color:white">Etiquetas</th>
       <th style="color:white">Puntaje</th>
@@ -73,6 +74,7 @@
         <td><strong><%= link_to question.titulo, question , style: "color:blue" %></strong> </td>
         <td><%= question.texto %></td>
         <td><%= link_to question.user.email, question.user, style: "color:green" %></td>
+        <td><%= link_to question.facultad.nombre, question.facultad, style: "color:green" %></td>
         <td><%=question.cant_answers%></td>
         <td><% question.tags.each do |tag| %>
 

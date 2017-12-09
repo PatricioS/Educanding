@@ -55,6 +55,10 @@ class FacultadsController < ApplicationController
   # DELETE /facultads/1
   # DELETE /facultads/1.json
   def destroy
+    @facultad.users.all.each do |user|
+      user.facultad = Facultad.first
+      user.save
+    end
     @facultad.destroy
     respond_to do |format|
       format.html { redirect_to facultads_url, notice: 'Facultad borrada!' }
