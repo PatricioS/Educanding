@@ -12,12 +12,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :nombre %>
-    <%= form.text_field :nombre, id: :tag_nombre , required: true%>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+
+
+
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        
+        <font color="white">
+<center>
+<h2 style="background-color: grey"  >
+  <strong style="color:white">ETIQUETA </strong>
+ </h2> 
+</center>
+</font>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <%= form.label :nombre %>
+          <%= form.text_field :nombre, id: :tag_nombre , required: true%>
+
+        </div>
+    <div class="actions">
+      <%= form.submit "Aceptar"%>
+    </div>
+
+        <hr>
+    
+      </div>
+      </div>
   </div>
+</div>
+</div>
+<hr>
+<h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>
+
+
 <% end %>

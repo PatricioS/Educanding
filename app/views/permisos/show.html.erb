@@ -1,39 +1,51 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Crearpost:</strong>
-  <%= @permiso.crearpost %>
-</p>
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        <h3 style="color:darkblue"><Strong>Usuario <%=@user.email%></strong></h3>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <strong>Puntaje para crear pregunta/respuesta: </strong><%= @permiso.crearpost %>
+        </div>
+        <hr>
+        <div class="field">
+          <strong>Puntaje para votar positivamente: </strong> <%= @permiso.votarpostivo %>
+        </div>
+        <hr>
+        <div class="field">
+          <strong>Puntaje para comentar: </strong><%= @permiso.comentar %>
+        </div>
+        <hr>
+        <div class="field">
+          <strong>Puntaje para votar negativamente: </strong><%= @permiso.votarnegativo %>
+        </div>
 
-<p>
-  <strong>Votarpostivo:</strong>
-  <%= @permiso.votarpostivo %>
-</p>
+        <div class="field">
+          <strong>Puntaje para administrar etiquetas: </strong><%= @permiso.etiqueta %>
+        </div>
 
-<p>
-  <strong>Comentar:</strong>
-  <%= @permiso.comentar %>
-</p>
+        <div class="field">
+          <strong>Puntaje para administrar facultades: </strong>  <%= @permiso.facultad %>
+        </div>
 
-<p>
-  <strong>Votarnegativo:</strong>
-  <%= @permiso.votarnegativo %>
-</p>
+        <div class="field">
+          <strong>Puntaje para modificar contenidos: </strong><%= @permiso.admin %>
+        </div>
 
-<p>
-  <strong>Etiqueta:</strong>
-  <%= @permiso.etiqueta %>
-</p>
 
-<p>
-  <strong>Facultad:</strong>
-  <%= @permiso.facultad %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @permiso.admin %>
-</p>
-
-<%= link_to 'Edit', edit_permiso_path(@permiso) %> |
-<%= link_to 'Back', permisos_path %>
+        <hr>
+       <% if user_signed_in?%>
+        <%if @user.email == "administrador@educanding.com"%>
+          <div>
+      <%=link_to 'Editar Perfil', edit_permiso_path(@permiso), class: "btn btn-primary", style: "color:white" %>
+      </div>
+    <% end %>
+    <% end %>
+    <h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>
+      </div>
+      </div>
+  </div>
+</div>
+</div>

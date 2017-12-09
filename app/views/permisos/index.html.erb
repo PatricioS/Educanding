@@ -1,38 +1,58 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Permisos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Crearpost</th>
-      <th>Votarpostivo</th>
-      <th>Comentar</th>
-      <th>Votarnegativo</th>
-      <th>Etiqueta</th>
-      <th>Facultad</th>
-      <th>Admin</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%@permiso=Permiso.first%>
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        <h3 style="color:darkblue"><Strong>TABLA DE PERMISOS</strong></h3>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <strong>Puntaje para crear pregunta/respuesta: </strong><%= @permiso.crearpost %>
+        </div>
+        <hr>
+        <div class="field">
+          <strong>Puntaje para votar positivamente: </strong> <%= @permiso.votarpostivo %>
+        </div>
+        <hr>
+        <div class="field">
+          <strong>Puntaje para comentar: </strong><%= @permiso.comentar %>
+        </div>
+        <hr>
+        <div class="field">
+          <strong>Puntaje para votar negativamente: </strong><%= @permiso.votarnegativo %>
+        </div>
+         <hr>
+        <div class="field">
+          <strong>Puntaje para administrar etiquetas: </strong><%= @permiso.etiqueta %>
+        </div>
+         <hr>
+        <div class="field">
+          <strong>Puntaje para administrar facultades: </strong>  <%= @permiso.facultad %>
+        </div>
+         <hr>
+        <div class="field">
+          <strong>Puntaje para modificar contenidos: </strong><%= @permiso.admin %>
+        </div>
 
-  <tbody>
-    <% @permisos.each do |permiso| %>
-      <tr>
-        <td><%= permiso.crearpost %></td>
-        <td><%= permiso.votarpostivo %></td>
-        <td><%= permiso.comentar %></td>
-        <td><%= permiso.votarnegativo %></td>
-        <td><%= permiso.etiqueta %></td>
-        <td><%= permiso.facultad %></td>
-        <td><%= permiso.admin %></td>
-        <!--<td><%= link_to 'Show', permiso %></td>-->
-        <td><%= link_to 'Edit', edit_permiso_path(permiso) %></td>
-        <!--<td><%= link_to 'Destroy', permiso, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-      </tr>
+
+        <hr>
+       <% if user_signed_in?%>
+        <%if current_user.email == "administrador@educanding.com"%>
+          <div>
+      <%=link_to 'Editar Permisos', edit_permiso_path(@permiso), class: "btn btn-primary", style: "color:white" %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+    <% end %>
+      </div>
+      </div>
+  </div>
+</div>
+</div>
+
 
 <br>
+    <h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>
 

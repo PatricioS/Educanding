@@ -9,7 +9,7 @@ class Question < ApplicationRecord
 	#after_update :save_tags
 	#before_update :del_tags
 	default_scope { order(created_at: :desc)}
-	scope :respuestas, -> { reorder(cant_answers: :desc)}
+	scope :respuestas, -> { reorder(cant_answers: :asc)}
 	@@orden=false
 
 	  #Custom setter

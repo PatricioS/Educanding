@@ -1,10 +1,15 @@
 <p id="notice"><%= notice %></p>
 <br>
 <br>
-<p>
-  <h2><strong> <%= @tag.nombre %></strong></h2>
- 		
-</p>
+
+<font color="white">
+<center>
+<h2 style="background-color: grey"  >
+  <strong style="color:white" ><%= @tag.nombre %></strong>
+ </h2> 
+</center>
+</font>
+
 <% if @tag.questions.any? %>
 	<hr>
 
@@ -61,4 +66,4 @@
 <br>
 <br>
 <!--<%= link_to 'Edit', edit_tag_path(@tag) %> |-->
-<h4><%= link_to 'Volver al listado de etiquetas', tags_path %></h4>
+<%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %>

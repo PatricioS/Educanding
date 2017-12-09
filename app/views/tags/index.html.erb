@@ -1,12 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <br><br>
-<h1>Etiquetas</h1>
+<font color="white">
+<center>
+<h2 style="background-color: grey"  >
+  <strong style="color:white" >LISTA DE ETIQUETAS</strong>
+ </h2> 
+</center>
+</font>
 
-<table>
+
+
+<table BGCOLOR="#d6dbdf" width="50%" align="center">
   <thead>
-    <tr>
-      <th>Nombre</th>
+    <tr BGCOLOR="#2e4053" >
+      <th style="color:white"> &nbsp; Etiqueta</th>
+      <th style="color:white" align="center"></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,26 +24,26 @@
     <% @tags.each do |tag| %>
       <tr>
         <% if tag.borrado == true %>
-          <td style="color:red"><%= tag.nombre %> </td>
-          <td><%= link_to 'Mostrar', tag %></td>
+          <td><strong> <%= link_to tag.nombre, tag , style: "color:red"%> </strong> </td>
           <%else%>
-          <td><%= tag.nombre %></td>
-           <td><%= link_to 'Mostrar', tag %></td>
-        <% if user_signed_in? %>
-        <% if current_user.email=="administrador@educanding.com" %>
-         <td><%= link_to 'Editar', edit_tag_path(tag) %></td>
-          <td><%= link_to 'Eliminar', tag, method: :delete, data: { confirm: '¿Esta seguro?' } %></td>
-       <% end %>
-       <% end %>
+            <td><strong><%= link_to tag.nombre, tag , style: "color:darkblue" %></strong> </td>
+          <% if user_signed_in? %>
+            <td><%= link_to 'Editar', edit_tag_path(tag) %></td>
+            <td><%= link_to 'Borrar', tag, method: :delete, data: { confirm: '¿Esta seguro de realizar esta accion?' } %></td>
+          <%end%>
         <%end%>
-        
-       
-       </tr>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
+
 <br>
  <% if user_signed_in? %>
-<%= link_to 'Nueva Etiqueta', new_tag_path %>
+<%= link_to 'Nueva Etiqueta', new_tag_path ,class: "btn btn-success" , style:"color:white" %>
 <%end%>
+<%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %>
+
+
+
+
