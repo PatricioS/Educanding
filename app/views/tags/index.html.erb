@@ -28,8 +28,10 @@
           <%else%>
             <td><strong><%= link_to tag.nombre, tag , style: "color:darkblue" %></strong> </td>
           <% if user_signed_in? %>
-            <td><%= link_to 'Editar', edit_tag_path(tag) %></td>
-            <td><%= link_to 'Borrar', tag, method: :delete, data: { confirm: '¿Esta seguro de realizar esta accion?' } %></td>
+            <% if current_user.puntaje >= Permiso.first.etiqueta %>
+              <td><%= link_to 'Editar', edit_tag_path(tag) %></td>
+              <td><%= link_to 'Borrar', tag, method: :delete, data: { confirm: '¿Esta seguro de realizar esta accion?' } %></td>
+            <%end%>
           <%end%>
         <%end%>
       </tr>
@@ -40,7 +42,9 @@
 
 <br>
  <% if user_signed_in? %>
-<%= link_to 'Nueva Etiqueta', new_tag_path ,class: "btn btn-success" , style:"color:white" %>
+    <% if current_user.puntaje >= Permiso.first.etiqueta %>
+      <%= link_to 'Nueva Etiqueta', new_tag_path ,class: "btn btn-success" , style:"color:white" %>
+    <%end%>
 <%end%>
 <%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %>
 

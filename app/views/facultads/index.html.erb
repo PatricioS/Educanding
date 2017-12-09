@@ -40,14 +40,21 @@
       <tr>
         <td><strong><%= link_to facultad.nombre, facultad , style: "color:blue" %></strong> </td>
         <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= facultad.cant_questions %></td>
-         <td><%= link_to 'Editar', edit_facultad_path(facultad) %></td>
-        <td><%= link_to 'Borrar', facultad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_signed_in? %>
+          <% if current_user.puntaje >= Permiso.first.facultad %>
+            <td><%= link_to 'Editar', edit_facultad_path(facultad) %></td>
+            <td><%= link_to 'Borrar', facultad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%end%>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'Nueva Facultad', new_facultad_path, class: "btn btn-success" , style:"color:white"%> 
+ <% if user_signed_in? %>
+    <% if current_user.puntaje >= Permiso.first.facultad %>
+      <%= link_to 'Nueva Facultad', new_facultad_path, class: "btn btn-success" , style:"color:white"%> 
+    <%end%>
+  <%end%>
 <%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %>

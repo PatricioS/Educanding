@@ -30,7 +30,7 @@
 	<br>
 		<strong>Escrito por: <%=link_to @question.user.email, @question.user ,style: "color:green"%> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
 		<% if user_signed_in? %> 
-			<%if @question.user.email==current_user.email %>
+			<%if (@question.user.email==current_user.email) || current_user.puntaje>=Permiso.first.admin %>
 				<%= link_to 'Editar', edit_question_path(@question) %>
            		 <%= link_to 'Eliminar', @question, method: :delete, data: { confirm: '¿Estas seguro de realizar esta accion?' } %>
            	<%end%>
@@ -39,8 +39,12 @@
 				Ya votaste esta pregunta!
 			<% else %>
 			<div allign="left">
-				<%= link_to "+1",  question_sumar_puntaje_path(@question), method: :post ,class: "btn btn-success" , style: "color:white"%>
-				<%= link_to "-1",  question_restar_puntaje_path(@question), method: :post ,class: "btn btn-danger" , style: "color:white"%>  
+				<% if current_user.puntaje >= Permiso.first.votarpostivo %>
+					<%= link_to "+1",  question_sumar_puntaje_path(@question), method: :post ,class: "btn btn-success" , style: "color:white"%>
+				<%end%>
+				<% if current_user.puntaje >= Permiso.first.votarnegativo %>
+					<%= link_to "-1",  question_restar_puntaje_path(@question), method: :post ,class: "btn btn-danger" , style: "color:white"%> 
+				<%end%> 
 				</div>
 			<%end%>
 			<%end%>
@@ -70,7 +74,7 @@
 					<br>
 					<strong>fecha de creacion: <%= questioncomment.created_at%> | Puntaje: <%= questioncomment.puntaje %> |  
 					<% if user_signed_in? %>
-						<% if questioncomment.user.email==current_user.email %>
+						<% if questioncomment.user.email==current_user.email  || current_user.puntaje>=Permiso.first.admin %>
 							<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
 							<%= link_to 'Eliminar', question_questioncomment_path(@question,questioncomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 						<%end%>
@@ -78,8 +82,12 @@
 							<% if HasVotoQuestioncomment.where(questioncomment_id: questioncomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= button_to "Votar +1",  question_questioncomment_sumar_puntaje_path(@question,questioncomment), method: :post %>
-								<%= button_to "Votar -1",  question_questioncomment_restar_puntaje_path(@question,questioncomment), method: :post %> 
+								<% if current_user.puntaje >= Permiso.first.votarpostivo %>
+									<%= button_to "Votar +1",  question_questioncomment_sumar_puntaje_path(@question,questioncomment), method: :post %>
+								<%end%>
+								<% if current_user.puntaje >= Permiso.first.votarnegativo %>
+									<%= button_to "Votar -1",  question_questioncomment_restar_puntaje_path(@question,questioncomment), method: :post %> 
+								<%end%>
 							<%end%>
 						<%end%>
 					<% end %>
@@ -99,9 +107,11 @@
 <td align="center" BGCOLOR="#e0e6f8">
 
   <% if user_signed_in? %>
+  	<% if current_user.puntaje >= Permiso.first.comentar %>
   	<br>
   	<%= render "questioncomments/form" %>
-  <%end%>
+  	<%end%>
+ <%end%>
  </td>
 </table>
 	
@@ -138,7 +148,7 @@
 			
 			<% if user_signed_in? %>
 				<% if answer.user.email==current_user.email %>
-					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+					<%=link_to 'Editar', edit_question_answer_path(@question,answer) || current_user.puntaje>=Permiso.first.admin %>
 					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 				<%end%>
 				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
@@ -149,8 +159,12 @@
 						Ya votaste esta respuesta!
 					<% else %>	
 						<hr>
-						<%= link_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post ,class: "btn btn-success" , style: "color:white"%> 
-						<%= link_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post,class: "btn btn-warning" , style: "color:white" %> 
+						<% if current_user.puntaje >= Permiso.first.votarpostivo %>
+							<%= link_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post ,class: "btn btn-success" , style: "color:white"%> 
+						<%end%>
+						<% if current_user.puntaje >= Permiso.first.votarnegativo %>
+							<%= link_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post,class: "btn btn-warning" , style: "color:white" %>
+						<%end%> 
 					<%end%>
 				<%end%>
 			<% end %>
@@ -173,7 +187,7 @@
 					<strong>fecha de creacion: <%= answercomment.created_at%> 
 					| Puntaje: <%= answercomment.puntaje %> |  | 
 					<% if user_signed_in? %>
-						<% if answercomment.user.email==current_user.email %>
+						<% if answercomment.user.email==current_user.email || current_user.puntaje>=Permiso.first.admin %>
 							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
 							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' }  %> |
 						<%end%>
@@ -181,8 +195,12 @@
 							<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= link_to "+1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-success" , style: "color:white"%> 
-								<%= link_to "-1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-danger" , style: "color:white"%> 
+								<% if current_user.puntaje >= Permiso.first.votarpostivo %>
+									<%= link_to "+1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-success" , style: "color:white"%> 
+								<%end%>
+								<% if current_user.puntaje >= Permiso.first.votarnegativo %>
+									<%= link_to "-1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-danger" , style: "color:white"%> 
+								<%end%>
 							<%end%>
 						<%end%>
 					<% end %>
@@ -193,9 +211,11 @@
 
 			<%end%>
 			<% if user_signed_in? %>
-			<% @answer=answer%>
-			  <%= render "answercomments/form"  %>
-			 <%end%>
+				<% if current_user.puntaje >= Permiso.first.comentar %>
+					<% @answer=answer%>
+			  		<%= render "answercomments/form"  %>
+			 	<%end%>
+			<%end%>
 		</td>
 			<hr>
 	<hr>
@@ -222,7 +242,7 @@
 			<strong>fecha de creacion: <%= answer.created_at%> | Puntaje: <%= answer.puntaje %> | 
 			
 			<% if user_signed_in? %>
-				<% if answer.user.email==current_user.email %>
+				<% if answer.user.email==current_user.email || current_user.puntaje>=Permiso.first.admin  %>
 					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
 					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 				<%end%>
@@ -234,8 +254,12 @@
 						Ya votaste esta respuesta!
 					<% else %>	
 						<hr>
-						<%= link_to "+1",  question_answer_sumar_puntaje_path(@question,answer), method: :post ,class: "btn btn-success" , style: "color:white"%> 
-						<%= link_to "-1",  question_answer_restar_puntaje_path(@question,answer), method: :post,class: "btn btn-danger" , style: "color:white" %> 
+						<% if current_user.puntaje >= Permiso.first.votarpostivo %>
+							<%= link_to "+1",  question_answer_sumar_puntaje_path(@question,answer), method: :post ,class: "btn btn-success" , style: "color:white"%> 
+						<%end%>
+						<% if current_user.puntaje >= Permiso.first.votarnegativo %>
+							<%= link_to "-1",  question_answer_restar_puntaje_path(@question,answer), method: :post,class: "btn btn-danger" , style: "color:white" %> 
+						<%end%>
 					<%end%>
 				<%end%>
 			<% end %>
@@ -258,7 +282,7 @@
 					<strong>fecha de creacion: <%= answercomment.created_at%> 
 					| Puntaje: <%= answercomment.puntaje %> |  | 
 					<% if user_signed_in? %>
-						<% if answercomment.user.email==current_user.email %>
+						<% if answercomment.user.email==current_user.email || current_user.puntaje>=Permiso.first.admin %>
 							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
 							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' }  %> |
 						<%end%>
@@ -266,8 +290,12 @@
 							<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= link_to "+1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-success" , style: "color:white" %> 
-								<%= link_to "-1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post,class: "btn btn-danger" , style: "color:white" %> 
+    							<% if current_user.puntaje >= Permiso.first.votarpostivo %>
+									<%= link_to "+1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-success" , style: "color:white" %> 
+								<%end%>
+								<% if current_user.puntaje >= Permiso.first.votarnegativo %>
+									<%= link_to "-1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post,class: "btn btn-danger" , style: "color:white" %> 
+								<%end%>
 							<%end%>
 						<%end%>
 					<% end %>
@@ -278,8 +306,10 @@
 
 			<%end%>
 			<% if user_signed_in? %>
-			<% @answer=answer%>
-			  <%= render "answercomments/form"  %>
+     			<% if current_user.puntaje >= Permiso.first.comentar %>
+					<% @answer=answer%>
+			  		<%= render "answercomments/form"  %>
+			 	<%end%>
 			 <%end%>
 		</td>
 	</table>
@@ -292,6 +322,8 @@
 
 <br>
   <% if user_signed_in? %>
-  <% @answer=Answer.new%>
-  <%= render "answers/form" %>
+     <% if current_user.puntaje >= Permiso.first.crearpost %>
+  		<% @answer=Answer.new%>
+ 		 <%= render "answers/form" %>
+ 		<%end%>
   <%end%>

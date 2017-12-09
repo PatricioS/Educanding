@@ -24,17 +24,17 @@ class PermisosController < ApplicationController
   # POST /permisos
   # POST /permisos.json
   def create
-    @permiso = Permiso.new(permiso_params)
+    #@permiso = Permiso.new(permiso_params)
 
-    respond_to do |format|
-      if @permiso.save
-        format.html { redirect_to @permiso, notice: 'Permiso was successfully created.' }
-        format.json { render :show, status: :created, location: @permiso }
-      else
-        format.html { render :new }
-        format.json { render json: @permiso.errors, status: :unprocessable_entity }
-      end
-    end
+    #respond_to do |format|
+     # if @permiso.save
+      #  format.html { redirect_to @permiso, notice: 'Permiso was successfully created.' }
+       # format.json { render :show, status: :created, location: @permiso }
+      #else
+       # format.html { render :new }
+        #format.json { render json: @permiso.errors, status: :unprocessable_entity }
+      #end
+    #end
   end
 
   # PATCH/PUT /permisos/1
@@ -42,7 +42,7 @@ class PermisosController < ApplicationController
   def update
     respond_to do |format|
       if @permiso.update(permiso_params)
-        format.html { redirect_to @permiso, notice: 'Permisos actualizados.' }
+        format.html { redirect_to permisos_url, notice: 'Permisos actualizados.' }
         format.json { render :show, status: :ok, location: @permiso }
       else
         format.html { render :edit }
@@ -54,11 +54,11 @@ class PermisosController < ApplicationController
   # DELETE /permisos/1
   # DELETE /permisos/1.json
   def destroy
-    @permiso.destroy
-    respond_to do |format|
-      format.html { redirect_to permisos_url, notice: 'Permiso was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    #@permiso.destroy
+    #respond_to do |format|
+     # format.html { redirect_to permisos_url, notice: 'Permiso was successfully destroyed.' }
+      #format.json { head :no_content }
+    #end
   end
 
   private
