@@ -12,7 +12,7 @@
 		<td><STRONG>Cuerpo de la pregunta:</STRONG> <br> <%= @question.texto %> <br> 
 
 		<hr>
-		<strong>Visitas: <%=@question.visitas%> ------------ Facultad de <%=@question.facultad.nombre %> </strong>
+		<strong>Visitas: <%=@question.visitas%> ------------ Facultad de <%=link_to @question.facultad.nombre ,@question.facultad%> </strong>
 		<br>
 
 		-----------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@
     		<br>
 		-----------------------------------------------------------------------------------------------------
 	<br>
-		<strong>Escrito por: <%=link_to @question.user.email, @question.user %> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
+		<strong>Escrito por: <%=link_to @question.user.email, @question.user ,style: "color:green"%> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
 		<% if user_signed_in? %> 
 			<%if @question.user.email==current_user.email %>
 				<%= link_to 'Editar', edit_question_path(@question) %>
@@ -39,8 +39,8 @@
 				Ya votaste esta pregunta!
 			<% else %>
 			<div allign="left">
-				<%= button_to "Votar +1",  question_sumar_puntaje_path(@question), method: :post %>
-				<%= button_to "Votar -1",  question_restar_puntaje_path(@question), method: :post %>  
+				<%= link_to "+1",  question_sumar_puntaje_path(@question), method: :post ,class: "btn btn-success" , style: "color:white"%>
+				<%= link_to "-1",  question_restar_puntaje_path(@question), method: :post ,class: "btn btn-danger" , style: "color:white"%>  
 				</div>
 			<%end%>
 			<%end%>
@@ -62,7 +62,7 @@
 			<table width="80%" border="3" cellpadding="1" cellspacing="1" bordercolor="#000000" BGCOLOR="#f2f2f1" >
 				<tr> 
 				<br><br>
-					<th><strong>Comentario del usuario:  <%=link_to questioncomment.user.email , questioncomment.user %> </strong>	</th>
+					<th><strong>Comentario del usuario:  <%=link_to questioncomment.user.email , questioncomment.user ,style: "color:green"%> </strong>	</th>
 				</tr>
 				<tr> 
 					<td><br> <%= questioncomment.texto %> <br>
@@ -72,7 +72,7 @@
 					<% if user_signed_in? %>
 						<% if questioncomment.user.email==current_user.email %>
 							<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
-							<%= link_to 'Eliminar', question_questioncomment_path(@question,questioncomment),  :method => :delete %> |
+							<%= link_to 'Eliminar', question_questioncomment_path(@question,questioncomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 						<%end%>
 						<% if current_user.email!=questioncomment.user.email %>
 							<% if HasVotoQuestioncomment.where(questioncomment_id: questioncomment.id).where(user_id: current_user.id).any? %>
@@ -123,11 +123,12 @@
 
 
 
-		<h3> Mejor Respuesta </h3>
+		
 		<% @question.answers.where(best: true).each do |answer| %>
+			<h3> Mejor Respuesta </h3>
 		<table width="90%" border="10" cellpadding="2" cellspacing="0" bordercolor="#2980b9" BGCOLOR="#fafafa" >
 		<tr> 
-			<th BGCOLOR="#89daf5" ><strong>Respuesta del usuario: <%=link_to answer.user.email , answer.user%> </strong>	</th>
+			<th BGCOLOR="#89daf5" ><strong>Respuesta del usuario: <%=link_to answer.user.email , answer.user ,style: "color:green"%> </strong>	</th>
 		</tr>
 		<tr> 
 			<td><br> <%= answer.texto %> <br>
@@ -138,7 +139,7 @@
 			<% if user_signed_in? %>
 				<% if answer.user.email==current_user.email %>
 					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
-					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete %> |
+					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 				<%end%>
 				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
 					<%=button_to 'Elegir como Mejor respuesta', question_answer_mejor_respuesta_path(@question,answer),method: :post , style: "color:darkgreen" %>
@@ -148,8 +149,8 @@
 						Ya votaste esta respuesta!
 					<% else %>	
 						<hr>
-						<%= button_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
-						<%= button_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post %> 
+						<%= link_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post ,class: "btn btn-success" , style: "color:white"%> 
+						<%= link_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post,class: "btn btn-warning" , style: "color:white" %> 
 					<%end%>
 				<%end%>
 			<% end %>
@@ -163,7 +164,7 @@
 			<table width="80%" border="3" cellpadding="2" cellspacing="1" bordercolor="#000000" BGCOLOR="#f2f2f1" >
 				<tr> 
 				<br><br>
-					<th><strong>Comentario del usuario:<%=link_to answercomment.user.email  , answercomment.user%> </strong>	</th>
+					<th><strong>Comentario del usuario:<%=link_to answercomment.user.email  , answercomment.user ,style: "color:green"%> </strong>	</th>
 				</tr>
 				<tr> 
 					<td><br> <%= answercomment.texto %> <br>
@@ -174,14 +175,14 @@
 					<% if user_signed_in? %>
 						<% if answercomment.user.email==current_user.email %>
 							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
-							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete %> |
+							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' }  %> |
 						<%end%>
 						<% if answercomment.user.email!=current_user.email %>
 							<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= button_to "Votar +1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post %> 
-								<%= button_to "Votar -1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post %> 
+								<%= link_to "+1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-success" , style: "color:white"%> 
+								<%= link_to "-1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-danger" , style: "color:white"%> 
 							<%end%>
 						<%end%>
 					<% end %>
@@ -196,14 +197,14 @@
 			  <%= render "answercomments/form"  %>
 			 <%end%>
 		</td>
+			<hr>
+	<hr>
+	<hr>
+
 	</table>
 
 
 	<%end%>
-
-	<hr>
-	<hr>
-	<hr>
 
 
 
@@ -212,7 +213,7 @@
 
 	<table width="90%" border="2" cellpadding="2" cellspacing="0" bordercolor="#000000" BGCOLOR="#fafafa" >
 		<tr> 
-			<th BGCOLOR="#89daf5" ><strong>Respuesta del usuario: <%=link_to answer.user.email , answer.user%> </strong>	</th>
+			<th BGCOLOR="#89daf5" ><strong>Respuesta del usuario: <%=link_to answer.user.email , answer.user,style: "color:green"%> </strong>	</th>
 		</tr>
 		<tr> 
 			<td><br> <%= answer.texto %> <br>
@@ -223,7 +224,7 @@
 			<% if user_signed_in? %>
 				<% if answer.user.email==current_user.email %>
 					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
-					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete %> |
+					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 				<%end%>
 				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
 					<%=button_to 'Elegir como Mejor respuesta', question_answer_mejor_respuesta_path(@question,answer),method: :post , style: "color:darkgreen" %>
@@ -233,8 +234,8 @@
 						Ya votaste esta respuesta!
 					<% else %>	
 						<hr>
-						<%= button_to "Votar +1",  question_answer_sumar_puntaje_path(@question,answer), method: :post %> 
-						<%= button_to "Votar -1",  question_answer_restar_puntaje_path(@question,answer), method: :post %> 
+						<%= link_to "+1",  question_answer_sumar_puntaje_path(@question,answer), method: :post ,class: "btn btn-success" , style: "color:white"%> 
+						<%= link_to "-1",  question_answer_restar_puntaje_path(@question,answer), method: :post,class: "btn btn-danger" , style: "color:white" %> 
 					<%end%>
 				<%end%>
 			<% end %>
@@ -248,7 +249,7 @@
 			<table width="80%" border="3" cellpadding="2" cellspacing="1" bordercolor="#000000" BGCOLOR="#f2f2f1" >
 				<tr> 
 				<br><br>
-					<th><strong>Comentario del usuario:<%=link_to answercomment.user.email  , answercomment.user%> </strong>	</th>
+					<th><strong>Comentario del usuario:<%=link_to answercomment.user.email  , answercomment.user,style: "color:green"%> </strong>	</th>
 				</tr>
 				<tr> 
 					<td><br> <%= answercomment.texto %> <br>
@@ -259,14 +260,14 @@
 					<% if user_signed_in? %>
 						<% if answercomment.user.email==current_user.email %>
 							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
-							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete %> |
+							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' }  %> |
 						<%end%>
 						<% if answercomment.user.email!=current_user.email %>
 							<% if HasVotoAnswercomment.where(answercomment_id: answercomment.id).where(user_id: current_user.id).any? %>
 								Ya votaste este comentario!
 							<% else %>
-								<%= button_to "Votar +1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post %> 
-								<%= button_to "Votar -1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post %> 
+								<%= link_to "+1",  question_answer_answercomment_sumar_puntaje_path(@question,answer,answercomment), method: :post ,class: "btn btn-success" , style: "color:white" %> 
+								<%= link_to "-1",  question_answer_answercomment_restar_puntaje_path(@question,answer,answercomment), method: :post,class: "btn btn-danger" , style: "color:white" %> 
 							<%end%>
 						<%end%>
 					<% end %>

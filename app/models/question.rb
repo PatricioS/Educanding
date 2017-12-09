@@ -9,8 +9,9 @@ class Question < ApplicationRecord
 	#after_update :save_tags
 	#before_update :del_tags
 	default_scope { order(created_at: :desc)}
-	#validate :tag_validate
-	#validates_associated :tags
+	scope :respuestas, -> { reorder(cant_answers: :desc)}
+	@@orden=false
+
 	  #Custom setter
 	
   	def tags=(value)
@@ -21,6 +22,14 @@ class Question < ApplicationRecord
  	 	self.visitas=0;
  	 end
  	 self.update(visitas: self.visitas + 1 )
+ 	end
+
+ 	def self.orden=(value)
+ 		@@orden=value
+ 	end
+
+ 	def self.orden
+ 		return @@orden
  	end
 
  	def del_tags

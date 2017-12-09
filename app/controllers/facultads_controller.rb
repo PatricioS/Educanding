@@ -26,6 +26,7 @@ class FacultadsController < ApplicationController
   def create
     @facultad = Facultad.new(facultad_params)
     @facultad.cant_questions = 0
+    @facultad.oculto = false
     respond_to do |format|
       if @facultad.save
         format.html { redirect_to @facultad, notice: 'Facultad creada!' }
@@ -59,6 +60,11 @@ class FacultadsController < ApplicationController
       format.html { redirect_to facultads_url, notice: 'Facultad borrada!' }
       format.json { head :no_content }
     end
+  end
+
+   def cambiar_orden
+    Facultad.orden = true
+    redirect_to facultads_url
   end
 
   private

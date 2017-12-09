@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index,:show]
+  before_action :authenticate_user!, except: [:index,:show,:cambiar_orden]
   before_action :set_puntaje, only:  [:save]
   #before_action :set_facultad, only: [:create, :update]
 
@@ -33,8 +33,8 @@ class QuestionsController < ApplicationController
   def edit
     @tags = Tag.all
     @question.ok=true
-
   end
+
 
   # POST /questions
   # POST /questions.json
@@ -52,6 +52,7 @@ class QuestionsController < ApplicationController
     if @question.facultad_id==nil
       raise params.yaml
     end
+    @question.facultad.update(cant_questions: @question.facultad.cant_questions+1)
     respond_to do |format|
       if params[:tags]!=nil
         if params[:tags].length <6
@@ -148,13 +149,19 @@ class QuestionsController < ApplicationController
         tag.destroy
       end
     end
-
+    @question.facultad.update(cant_questions: @question.facultad.cant_questions-1)
     @question.destroy
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'La pregunta se borro correctamente' }
       format.json { head :no_content }
     end
   end
+
+
+def cambiar_orden
+  Question.orden = true
+  redirect_to root_path
+end
 
 
  def sumar_puntaje

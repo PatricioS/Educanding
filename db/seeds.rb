@@ -5,12 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-	Facultad.find_or_create_by(nombre: "", cant_questions: 0)
-	Facultad.find_or_create_by(nombre: "Ingenieria" ,cant_questions: 0)
-	Facultad.find_or_create_by(nombre: "Veterinaria" ,cant_questions: 0)
-	Facultad.find_or_create_by(nombre: "Ciencias Economicas" ,cant_questions: 0)
-	Facultad.find_or_create_by(nombre: "Informatica" ,cant_questions: 0)
-	Facultad.find_or_create_by(nombre: "Medicina" ,cant_questions: 0)	
+	Facultad.find_or_create_by(nombre: "", cant_questions: 0, oculto: true)
+	Facultad.find_or_create_by(nombre: "Ingenieria" ,cant_questions: 0, oculto: false)
+	Facultad.find_or_create_by(nombre: "Veterinaria" ,cant_questions: 0,oculto: false)
+	Facultad.find_or_create_by(nombre: "Ciencias Economicas" ,cant_questions: 0, oculto: false)
+	Facultad.find_or_create_by(nombre: "Informatica" ,cant_questions: 0, oculto: false)
+	Facultad.find_or_create_by(nombre: "Medicina" ,cant_questions: 0, oculto: false)	
 
 	Tag.find_or_create_by(nombre: "Fisica", borrado: false)
 	Tag.find_or_create_by(nombre: "Matematica", borrado: false)

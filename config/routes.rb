@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'search/create'
 
   resources :permisos
-  resources :facultads
+  resources :facultads do
+     post 'cambiar_orden'
+  end
   match '/users', to: 'users#Index', via: 'get'
   match '/users/show/:id', to: 'users#show', via: 'get'
 
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
   resources :tags
   resources :etiqueta
   resources :questions do
+      post 'cambiar_orden'
       post 'sumar_puntaje'
       post 'restar_puntaje'
       resources :questioncomments do

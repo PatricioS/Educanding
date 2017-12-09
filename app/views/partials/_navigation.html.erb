@@ -6,7 +6,7 @@
           <%params[:titulo]=nil%>
            <%= form_tag questions_path, method: :get  do %>
               <%= text_field_tag :titulo , params[:titulo], placeholder: "Buscar pregunta" %>
-              <%= submit_tag "Buscar" , :name => nil %> 
+              <%= submit_tag "Buscar" , :name => nil ,class: "btn btn-info" , style: "color:white" %> 
             <%end%>
           </a>
 

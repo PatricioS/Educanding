@@ -31,8 +31,7 @@
         
             <div class= "field">
             <label>Facultad</label>
-            <% @aux=Facultad.all %>
-            <%= form.select  :facultad_id, Facultad.all.collect { |p|  [p.nombre, p.id] }%>
+            <%= form.select  :facultad_id, Facultad.where(oculto: false).collect { |p|  [p.nombre, p.id] }%>
             <!--
            -->
           </div>
@@ -49,9 +48,11 @@
         </div>
 
       <div class="actions">
-          <%= submit_tag "Aceptar"%>
+          <%= submit_tag "Aceptar" %>
       </div>
               <hr>
+<h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>
+              
       </div>
       </div>
   </div>

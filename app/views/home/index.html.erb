@@ -30,13 +30,28 @@
     <!-- Footer -->
     <br>
     <br>
-     
+  
 
-          <div class="card card-outline-secondary my-4">
-            <div class="card-header" align="center">
-              Preguntas
-            </div>
-          </div>
+ <% if Question.any? %>
+<% @question=Question.first %>
+<% if Question.orden== true %>
+  <h3><%= link_to "Ordenar por fecha de creacion",  root_path ,class: "btn btn-primary" , style: "color:white" %></h3>
+  <%@questions=Question.respuestas%>
+  <%Question.orden = false %>
+<%else%>
+  <h3><%= link_to "Ordenar por cantidad de Respuestas",  question_cambiar_orden_path(@question), method: :post ,class: "btn btn-primary" , style: "color:white" %></h3>
+  <% @questions=Question.all%>
+  <%end%>  
+
+<font color="white">
+<center>
+<h2 style="background-color: darkblue"  >
+  <strong style="color:white">LISTA DE PREGUNTAS </strong>
+ </h2> 
+</center>
+</font>
+
+  
 
 <table BGCOLOR="#d6dbdf" width="100%" align="center">
   <thead>
@@ -53,7 +68,7 @@
   </thead>
 
   <tbody>
-    <% Question.all.each do |question| %>
+    <% @questions.each do |question| %>
       <tr>
         <td><strong><%= link_to question.titulo, question , style: "color:blue" %></strong> </td>
         <td><%= question.texto %></td>
@@ -81,38 +96,8 @@
 <br>
 
 <br>
+<%end%>
 
-
-      <div class="container">
-
-
-        <div class="col-lg-10"> 
-          <div class="list-group">
-            <% Tag.all.each do |tag| %>
-             <a class="list-group-item" <%=link_to tag.nombre, tag%> </a>
-            <%end%>
-          </div>
-        </div>
-        <!-- /.col-lg-3 
-
-        <div class="col-lg-9">
-
-          <div class="card mt-4">
-            <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-            <div class="card-body">
-              <h3 class="card-title">Remaches a solo: </h3>
-              <h4>$24.99</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-              <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-              4.0 stars
-            </div>
-          </div>-->
-          <!-- /.card -->
-
-        </div>
-        <!-- /.col-lg-9 -->
-
-    </div>
 
   </body>
 

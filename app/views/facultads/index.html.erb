@@ -1,29 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Facultads</h1>
+<h1>Lista de Facultades</h1>
 
-<table>
+
+<% if Facultad.orden== true %>
+  <%= link_to "Ordenar por fecha de creacion",  facultads_url,class: "btn btn-primary" , style: "color:white"  %>
+
+  <% @facultads=Facultad.where(oculto: false).preguntas %>
+  <%Facultad.orden = false %>
+<%else%>
+  <%= link_to "Ordenar por cantidad de preguntas", facultad_cambiar_orden_path(Facultad.first), method: :post ,class: "btn btn-primary" , style: "color:white" %>
+  <% @facultads=Facultad.where(oculto: false) %>
+  <%end%>
+
+
+
+ 
+  <br>  <br>
+
+<table BGCOLOR="#d6dbdf" width="100%" align="center">
   <thead>
-    <tr>
-      <th>Nombre</th>
+    <tr BGCOLOR="#2e4053" >
+      <th style="color:white"> &nbsp; Facultad</th>
+      <th style="color:white">Cantidad de preguntas</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @facultads.each do |facultad| %>
-    <% if facultad.nombre != "" %>
       <tr>
-        <td><%= facultad.nombre %></td>
-        <td><%= link_to 'Show', facultad %></td>
-        <td><%= link_to 'Edit', edit_facultad_path(facultad) %></td>
-        <td><%= link_to 'Destroy', facultad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><strong><%= link_to facultad.nombre, facultad , style: "color:blue" %></strong> </td>
+        <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= facultad.cant_questions %></td>
+         <td><%= link_to 'Editar', edit_facultad_path(facultad) %></td>
+        <td><%= link_to 'Borrar', facultad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <%end%>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Facultad', new_facultad_path %>
+<%= link_to 'Nueva Facultad', new_facultad_path, method: :post ,class: "btn btn-success" , style:"color:white"%> 
+<%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %>
