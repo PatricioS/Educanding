@@ -2,21 +2,27 @@
 
 <p>
 <br>
-<!--<h3><strong><%= link_to 'Volver al listado de preguntas', questions_path %></strong></h3>-->
 <br>
+
+<center>
+<h2 style="background-color: darkblue" asign="left" >
+  <strong style="color:white" > &nbsp; Pregunta &nbsp;</strong>
+ </h2> 
+
+
 <table width="50%" border="2" cellpadding="2" cellspacing="0" bordercolor="#000000" BGCOLOR="#f2f2f2">
 	<tr> 
-		<th><strong>Titulo de la pregunta: <%= @question.titulo %></strong>	</th>
+		<th><strong>Titulo de la pregunta: <%= @question.titulo %> <right> | Autor: <%=link_to @question.user.email, @question.user ,style: "color:green"%>  </right>
+		</strong> </th>
 	</tr>
 	<tr> 
 		<td><STRONG>Cuerpo de la pregunta:</STRONG> <br> <%= @question.texto %> <br> 
 
 		<hr>
-		<strong>Visitas: <%=@question.visitas%> ------------ Facultad de <%=link_to @question.facultad.nombre ,@question.facultad%> </strong>
-		<br>
-
-		-----------------------------------------------------------------------------------------------------
-		<br><strong>
+		<strong> Publicado en la Facultad de <%=link_to @question.facultad.nombre ,@question.facultad ,style: "color:green"%>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		 </strong>
+		<hr>
+		<strong>
 		Etiquetas:
 		<% @question.tags.each do |tag| %>
 		  <%if tag.borrado == true %>
@@ -28,12 +34,15 @@
     		<br>
 		-----------------------------------------------------------------------------------------------------
 	<br>
-		<strong>Escrito por: <%=link_to @question.user.email, @question.user ,style: "color:green"%> | fecha de creacion: <%= @question.created_at%>  Puntaje: <%= @question.puntaje %> |
+		<strong>Visitas: <%=@question.visitas%> | Fecha de creacion: <%= @question["created_at"].strftime("%I:%M %p %d-%b-%y") %> |
 		<% if user_signed_in? %> 
-			<%if (@question.user.email==current_user.email) || current_user.puntaje>=Permiso.first.admin %>
-				<%= link_to 'Editar', edit_question_path(@question) %>
+			<%if (@question.user.email==current_user.email) %>
+				<% if current_user.puntaje>=Permiso.first.admin %>
+           			<%= link_to 'Editar', edit_question_path(@question) %>
+           		<%end%>
            		 <%= link_to 'Eliminar', @question, method: :delete, data: { confirm: '¿Estas seguro de realizar esta accion?' } %>
            	<%end%>
+
            	<% if current_user.email!=@question.user.email %>
 			<% if HasVotoQuestion.where(question_id: @question.id).where(user_id: current_user.id).any? %>
 				Ya votaste esta pregunta!
@@ -54,10 +63,18 @@
 </table>
   
 </p>
+</center>
+
+<font color="white">
+<center>
+<h2 style="background-color: grey"  >
+  <strong style="color:white" >Comentarios de la pregunta</strong>
+ </h2> 
+</center>
+</font>
+
 <table width="90%" border="0" cellpadding="1" cellspacing="0" bordercolor="#000000" BGCOLOR="#fafafa" >
 	<% if @question.questioncomments.any? %>
-		<tr> <h2>Comentarios</h2>
-		</tr>
 		<%end%>
 
 <% @question.questioncomments.each do |questioncomment| %>
@@ -72,10 +89,12 @@
 					<td><br> <%= questioncomment.texto %> <br>
 					-----------------------------------------------------------------------------------------------------
 					<br>
-					<strong>fecha de creacion: <%= questioncomment.created_at%> | Puntaje: <%= questioncomment.puntaje %> |  
+					<strong>Fecha de creacion: <%= questioncomment["created_at"].strftime("%I:%M %p %d-%b-%y") %>  | Puntaje: <%= questioncomment.puntaje %> |  
 					<% if user_signed_in? %>
-						<% if questioncomment.user.email==current_user.email  || current_user.puntaje>=Permiso.first.admin %>
-							<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
+						<% if questioncomment.user.email==current_user.email %>
+							<% if current_user.puntaje>=Permiso.first.admin %>
+           						<%=link_to 'Editar', edit_question_questioncomment_path(@question,questioncomment) %>
+           					<%end%>
 							<%= link_to 'Eliminar', question_questioncomment_path(@question,questioncomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 						<%end%>
 						<% if current_user.email!=questioncomment.user.email %>
@@ -100,9 +119,13 @@
 
 
 
+
+
 </td>
 
 </tr>
+
+
 
 <td align="center" BGCOLOR="#e0e6f8">
 
@@ -114,21 +137,19 @@
  <%end%>
  </td>
 </table>
-	
-
+<hr>
+<font color="white">
+<center>
+<h2 style="background-color: grey"  >
+  <strong style="color:white" >Respuestas</strong>
+ </h2> 
+</center>
+</font>
 
 <div class="field">
 <% if @question.answers.any? %>
 <table frame="box" border="3" cellpadding="2" bordercolor="#000000" BGCOLOR="#a9a9f5" align="center" width="90%">
 
-	<tr></tr>
-	<tr>
-	     <div class="card card-outline-secondary my-4">
-            <div class="card-header" align="center">
-              Respuestas
-            </div>
-          </div>
-    </tr>
 	<td align="center">	<br>
 
 
@@ -144,15 +165,14 @@
 			<td><br> <%= answer.texto %> <br>
 			-----------------------------------------------------------------------------------------------------
 			<br>
-			<strong>fecha de creacion: <%= answer.created_at%> | Puntaje: <%= answer.puntaje %> | 
+			<strong>Fecha de creacion: <%= answer["created_at"].strftime("%I:%M %p %d-%b-%y") %>  | Puntaje: <%= answer.puntaje %> | 
 			
 			<% if user_signed_in? %>
 				<% if answer.user.email==current_user.email %>
-					<%=link_to 'Editar', edit_question_answer_path(@question,answer) || current_user.puntaje>=Permiso.first.admin %>
+					<% if current_user.puntaje>=Permiso.first.admin %>
+						<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+					<%end%>
 					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
-				<%end%>
-				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
-					<%=button_to 'Elegir como Mejor respuesta', question_answer_mejor_respuesta_path(@question,answer),method: :post , style: "color:darkgreen" %>
 				<%end%>
 				<% if answer.user.email!=current_user.email %>
 					<% if HasVotoAnswer.where(answer_id: answer.id).where(user_id: current_user.id).any? %>
@@ -184,11 +204,13 @@
 					<td><br> <%= answercomment.texto %> <br>
 					-----------------------------------------------------------------------------------------------------
 					<br>
-					<strong>fecha de creacion: <%= answercomment.created_at%> 
+					<strong>Fecha de creacion <%= answercomment["created_at"].strftime("%I:%M %p %d-%b-%y") %> 
 					| Puntaje: <%= answercomment.puntaje %> |  | 
 					<% if user_signed_in? %>
-						<% if answercomment.user.email==current_user.email || current_user.puntaje>=Permiso.first.admin %>
-							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+						<% if answercomment.user.email==current_user.email %>
+							<% if current_user.puntaje>=Permiso.first.admin %>
+								<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+							<%end%>
 							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' }  %> |
 						<%end%>
 						<% if answercomment.user.email!=current_user.email %>
@@ -239,11 +261,13 @@
 			<td><br> <%= answer.texto %> <br>
 			-----------------------------------------------------------------------------------------------------
 			<br>
-			<strong>fecha de creacion: <%= answer.created_at%> | Puntaje: <%= answer.puntaje %> | 
+			<strong>Fecha de creacion: <%= answer["created_at"].strftime("%I:%M %p %d-%b-%y") %> | 
 			
 			<% if user_signed_in? %>
-				<% if answer.user.email==current_user.email || current_user.puntaje>=Permiso.first.admin  %>
-					<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+				<% if answer.user.email==current_user.email  %>
+					<% if current_user.puntaje>=Permiso.first.admin %>
+						<%=link_to 'Editar', edit_question_answer_path(@question,answer) %>
+					<%end%>
 					<%= link_to 'Eliminar', question_answer_path(@question,answer),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' } %> |
 				<%end%>
 				<% if @question.user.email==current_user.email && @question.user.email != answer.user.email && answer.best==false%>
@@ -279,11 +303,13 @@
 					<td><br> <%= answercomment.texto %> <br>
 					-----------------------------------------------------------------------------------------------------
 					<br>
-					<strong>fecha de creacion: <%= answercomment.created_at%> 
+					<strong>Fecha de creacion: <%= answercomment["created_at"].strftime("%I:%M %p %d-%b-%y") %> 
 					| Puntaje: <%= answercomment.puntaje %> |  | 
 					<% if user_signed_in? %>
 						<% if answercomment.user.email==current_user.email || current_user.puntaje>=Permiso.first.admin %>
-							<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+							<% if current_user.puntaje>=Permiso.first.admin %>
+								<%=link_to 'Editar', edit_question_answer_answercomment_path(@question,answer,answercomment) %>
+							<% end %>
 							<%= link_to 'Eliminar', question_answer_answercomment_path(@question,answer,answercomment),  :method => :delete , data: { confirm: '¿Estas seguro de realizar esta accion?' }  %> |
 						<%end%>
 						<% if answercomment.user.email!=current_user.email %>

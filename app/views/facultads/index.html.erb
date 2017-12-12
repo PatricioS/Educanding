@@ -31,6 +31,7 @@
     <tr BGCOLOR="#2e4053" >
       <th style="color:white"> &nbsp; Facultad</th>
       <th style="color:white">Cantidad de preguntas</th>
+      <th style="color:white">Fecha de creacion</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -40,6 +41,7 @@
       <tr>
         <td><strong><%= link_to facultad.nombre, facultad , style: "color:blue" %></strong> </td>
         <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= facultad.cant_questions %></td>
+        <td><%= facultad["created_at"].strftime("%I:%M %p %d-%b-%y") %></td>
         <% if user_signed_in? %>
           <% if current_user.puntaje >= Permiso.first.facultad %>
             <td><%= link_to 'Editar', edit_facultad_path(facultad) %></td>
