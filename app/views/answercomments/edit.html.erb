@@ -1,7 +1,14 @@
 
 <br>
-<h1>Editando comentario</h1>
+
+        <font color="white">
+<center>
+<h2 style="background-color: darkblue"  >
+  <strong style="color:white">Editando comentario de respuesta</strong>
+ </h2> 
+</center>
+</font>
 
 <%= render 'form', question: @question, answer: @answer, answercomment: @answercomment %>
 
-<%= link_to 'Back', question_answer_path(@question,@answer) %>
+<h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>

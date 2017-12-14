@@ -12,12 +12,34 @@
   <% end %>
 
 
-  <div class="field">
-   <h2> <%= form.label :Comentar %> </h2>
-    <%= form.text_area :texto, id: :answercomment_texto, required: true,  size:"150x4",placeholder:'Escribe un comentario'  %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit value="Crear comentario"%>
+  <div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        
+<center>
+<h3>
+  Comentario de respuesta
+ </h3> 
+</center>
+      </div>
+      <div class="card-body">
+        <div class="field">
+         <%= form.text_area :texto, id: :answercomment_texto, required: true,  size:"150x4",placeholder:'Escribe un comentario'  %>
+        </div>
+    <div class="actions">
+      <%= form.submit "Aceptar"%>
+    </div>
+
+        <hr>
+    
+      </div>
+      </div>
   </div>
+</div>
+</div>
+<hr>
+
+
 <% end %>
