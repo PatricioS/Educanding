@@ -17,7 +17,7 @@
   <% @facultads=Facultad.where(oculto: false).preguntas %>
   <%Facultad.orden = false %>
 <%else%>
-  <%= link_to "Ordenar por cantidad de preguntas", facultad_cambiar_orden_path(Facultad.first), method: :post ,class: "btn btn-primary" , style: "color:white" %>
+  <%= link_to "Ordenar por mayor cantidad de preguntas", facultad_cambiar_orden_path(Facultad.first), method: :post ,class: "btn btn-primary" , style: "color:white" %>
   <% @facultads=Facultad.where(oculto: false) %>
   <%end%>
 

@@ -46,7 +46,7 @@
   <%@questions=Question.respuestas%>
   <%Question.orden = false %>
 <%else%>
-  <h3><%= link_to "Ordenar por cantidad de Respuestas",  question_cambiar_orden_path(@question), method: :post ,class: "btn btn-primary" , style: "color:white" %></h3>
+  <h3><%= link_to "Ordenar por menor cantidad de Respuestas",  question_cambiar_orden_path(@question), method: :post ,class: "btn btn-primary" , style: "color:white" %></h3>
   <% @questions=Question.all%>
   <%end%>  
 
