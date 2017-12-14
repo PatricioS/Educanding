@@ -156,7 +156,11 @@
 
 		
 		<% @question.answers.where(best: true).each do |answer| %>
-			<h3> Mejor Respuesta </h3>
+			<center>
+<h2 style="background-color: darkgrey"  >
+  <strong style="color:white" >Mejor respuesta elegida por el autor de la pregunta</strong>
+ </h2> 
+</center>
 		<table width="90%" border="10" cellpadding="2" cellspacing="0" bordercolor="#2980b9" BGCOLOR="#fafafa" >
 		<tr> 
 			<th BGCOLOR="#89daf5" ><strong>Respuesta del usuario: <%=link_to answer.user.email , answer.user ,style: "color:green"%> </strong>	</th>
@@ -239,12 +243,14 @@
 			 	<%end%>
 			<%end%>
 		</td>
-			<hr>
-	<hr>
-	<hr>
 
 	</table>
-
+	<br>
+			<center>
+	<h2 style="background-color: darkgrey"  >
+  	<strong style="color:white" >&nbsp;</strong>
+ 	</h2> 
+	</center>
 
 	<%end%>
 

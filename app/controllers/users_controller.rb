@@ -13,12 +13,15 @@ class UsersController < ApplicationController
 
   def update_password
   	@user=current_user
+    respond_to do |format|
   	if @user.update_with_password(user_params)
   		bypass_sign_in(@user)
-  		redirect_to root_path
+      format.html { redirect_to @user, notice: 'Se cambio la contraseña de manera exitosa' }
+      format.json { render :show, status: :created, location: @user }
   	else
   		render "edit"
   	end
+  end
   end
 
   	private

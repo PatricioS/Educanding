@@ -1,20 +1,37 @@
 <%= form_for(@user, :url => { :action => "update_password" } ) do |f| %>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(Se necesita tu contraseña actual para la confirmacion del cambio)</i><br />
-    <%= f.password_field :current_password %>
-  </div>
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        <h3 style="color:darkblue"><Strong>Usuario: <%=@user.email%></strong></h3>
+      </div>
+      <div class="card-body">
+        <div class="field">
+             <strong><%= f.label :current_password %></strong> <br>
+              <%= f.password_field :current_password %>
+        </div>
+        <hr>
+        <div class="field">
+           <strong><%= f.label :password, "Contraseña nueva" %></strong><br />
+           <%= f.password_field :password, :autocomplete => "off"  %>
+        </div>
+        <hr>
+        <div class="field">
+              <strong><%= f.label :password_confirmation %></strong><br />
+             <%= f.password_field :password_confirmation %>
+        </div>
+        <hr>
+          <div class="actions">
+          <%= f.submit "Actualizar", class: "btn btn-primary" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password, "Contraseña nueva" %><br />
-    <%= f.password_field :password, :autocomplete => "off"  %>
+
+      </div>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="action_container">
-    <%= f.submit %>
-  </div>
-  <h3><%= link_to "Volver al perfil", :back %> </h3>
+</div>
+</div>
+
+<h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>
 <% end %>

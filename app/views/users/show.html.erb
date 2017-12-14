@@ -21,6 +21,11 @@
           <strong>Puntaje: </strong><%=@user.puntaje %>
         </div>
         <hr>
+        <div class="field">
+          <strong>Se unio a Educanding: </strong> <%= @user["created_at"].strftime(" %d-%b-%y") %>
+        </div>
+        <hr>
+
        <% if user_signed_in?%>
         <%if @user.email == current_user.email%>
         	<div>
@@ -36,4 +41,4 @@
 </div>
 </div>
 <br>
-    <h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>
+<h3><%= link_to "Volver", :back , class: "btn btn-info", style: "color:white" %> </h3>

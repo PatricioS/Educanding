@@ -11,42 +11,80 @@
     </div>
   <% end %>
 
+<div class="container">
+  <div class="panel-center">
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        <h3 style="color:darkblue"><Strong>EDITANDO TABLA DE PERMISOS</strong></h3>
+      </div>
+      <div class="card-body">
+        <div class="field">
+            <%= form.label :crearpost %>
+            <%= form.number_field :crearpost, id: :permiso_crearpost %>
+        </div>
+        <hr>
+        <div class="field">
+          <%= form.label :votarpostivo %>
+          <%= form.number_field :votarpostivo, id: :permiso_votarpostivo %>
+        </div>
+        <hr>
+        <div class="field">
+          <%= form.label :comentar %>
+          <%= form.number_field :comentar, id: :permiso_comentar %>
+        </div>
+        <hr>
+        <div class="field">
+          <%= form.label :votarnegativo %>
+          <%= form.number_field :votarnegativo, id: :permiso_votarnegativo %>
+        </div>
+         <hr>
+        <div class="field">
+          <%= form.label :etiqueta %>
+          <%= form.number_field :etiqueta, id: :permiso_etiqueta %>
+        </div>
+         <hr>
+        <div class="field">
+          <%= form.label :facultad %>
+          <%= form.number_field :facultad, id: :permiso_facultad %>
+        </div>
+         <hr>
+        <div class="field">
+          <%= form.label :admin %>
+          <%= form.number_field :admin, id: :permiso_admin %>
+        </div>
+        <hr>
+          <div class="actions">
+        <%= form.submit %>
+      </div>
+
+      </div>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+
   <div class="field">
-    <%= form.label :crearpost %>
-    <%= form.number_field :crearpost, id: :permiso_crearpost %>
+    
   </div>
 
   <div class="field">
-    <%= form.label :votarpostivo %>
-    <%= form.number_field :votarpostivo, id: :permiso_votarpostivo %>
+    
   </div>
 
   <div class="field">
-    <%= form.label :comentar %>
-    <%= form.number_field :comentar, id: :permiso_comentar %>
+    
   </div>
 
   <div class="field">
-    <%= form.label :votarnegativo %>
-    <%= form.number_field :votarnegativo, id: :permiso_votarnegativo %>
+    
   </div>
 
   <div class="field">
-    <%= form.label :etiqueta %>
-    <%= form.number_field :etiqueta, id: :permiso_etiqueta %>
+    
   </div>
 
-  <div class="field">
-    <%= form.label :facultad %>
-    <%= form.number_field :facultad, id: :permiso_facultad %>
-  </div>
 
-  <div class="field">
-    <%= form.label :admin %>
-    <%= form.number_field :admin, id: :permiso_admin %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

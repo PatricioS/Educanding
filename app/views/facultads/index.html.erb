@@ -41,7 +41,7 @@
       <tr>
         <td><strong><%= link_to facultad.nombre, facultad , style: "color:blue" %></strong> </td>
         <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= facultad.cant_questions %></td>
-        <td><%= facultad["created_at"].strftime("%I:%M %p %d-%b-%y") %></td>
+        <td><%= facultad["created_at"].strftime("%d-%b-%y") %></td>
         <% if user_signed_in? %>
           <% if current_user.puntaje >= Permiso.first.facultad %>
             <td><%= link_to 'Editar', edit_facultad_path(facultad) %></td>
